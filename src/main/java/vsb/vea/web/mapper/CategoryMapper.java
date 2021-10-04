@@ -21,12 +21,20 @@ public class CategoryMapper {
 		category.id = categoryDetail.id;
 		category.name = categoryDetail.name;
 		category.description = categoryDetail.description;
-		//category.products = categoryDetail.products;
+		category.products = ProductMapper.fromProductBrief(categoryDetail.products);
 		return category;
 	}
 
 	public static Category fromCategoryInput(CategoryInput categoryInput) {
 		Category category = new Category();
+		category.name = categoryInput.name;
+		category.description = categoryInput.description;
+		return category;
+	}
+	
+	public static Category fromCategoryInput(int id, CategoryInput categoryInput) {
+		Category category = new Category();
+		category.id = id;
 		category.name = categoryInput.name;
 		category.description = categoryInput.description;
 		return category;
@@ -39,10 +47,10 @@ public class CategoryMapper {
 		return categoryBrief;
 	}
 	
-	public static List<CategoryBrief> toCategoryBriefs(List<Category> categories){
+	public static List<CategoryBrief> toCategoryBrief(List<Category> categories){
 		List<CategoryBrief> categoryBriefs = new ArrayList<CategoryBrief>();
 		for(Category category : categories) {
-			categoryBriefs.add(CategoryMapper.toCategoryBrief(category));
+			categoryBriefs.add(toCategoryBrief(category));
 		}
 		return categoryBriefs;
 	}
@@ -52,7 +60,7 @@ public class CategoryMapper {
 		categoryDetail.id = category.id;
 		categoryDetail.name = category.name;
 		categoryDetail.description = category.description;
-		//categoryDetail.products = category.products;
+		categoryDetail.products = ProductMapper.toProductBrief(category.products);
 		return categoryDetail;
 	}
 	

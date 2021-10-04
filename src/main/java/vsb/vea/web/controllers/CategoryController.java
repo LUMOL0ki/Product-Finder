@@ -18,7 +18,7 @@ public class CategoryController {
 	}
 	
 	public List<CategoryBrief> get(){
-		return CategoryMapper.toCategoryBriefs(service.get());
+		return CategoryMapper.toCategoryBrief(service.get());
 	}
 	
 	public CategoryDetail findById(int id) {
@@ -33,7 +33,7 @@ public class CategoryController {
 	
 	public List<CategoryBrief> findByName(String name){
 		try {
-			return CategoryMapper.toCategoryBriefs(service.findByName(name));
+			return CategoryMapper.toCategoryBrief(service.findByName(name));
 		} catch (FormatException e) {
 			e.printStackTrace(); //TODO: exception handler.
 		}
@@ -49,10 +49,10 @@ public class CategoryController {
 		}
 	}
 
-	public void edit(CategoryInput category) throws FormatException {
+	public void edit(int id, CategoryInput category) throws FormatException {
 		service.edit(null);
 		if(category != null) {
-			service.edit(CategoryMapper.fromCategoryInput(category));
+			service.edit(CategoryMapper.fromCategoryInput(id, category));
 		}
 		else {
 			throw new FormatException("Category is in invalid format.");

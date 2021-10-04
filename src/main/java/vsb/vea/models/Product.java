@@ -6,7 +6,7 @@ public class Product {
 	public int id;
 	public String name;
 	public String description;
-	public String EAN;
+	public String ean;
 	public int supplierId;
 	public Supplier supplier;
 	public int categoryId;

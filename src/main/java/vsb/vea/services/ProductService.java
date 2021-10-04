@@ -58,15 +58,25 @@ public class ProductService extends BaseService<Product, IProductRepository> {
 		}
 	}
 
-	public List<Product> findByNameOrEAN(String value) throws FormatException{
-		if(!StringHelper.isNullOrEmpty(value)) {
-			return repository.findByName(value);	
+	public List<Product> findByNameOrEAN(String filter) throws FormatException{
+		if(!StringHelper.isNullOrEmpty(filter)) {
+			return repository.findByName(filter);	
 		}
 		else {
 			throw new FormatException("Product name is in invalid format.");
 		}
 	}
-
+	
+	public void remove(int id) throws FormatException {
+		Product product = repository.findById(id);
+		if(product != null) {
+			repository.remove(product);
+		}
+		else {
+			throw new FormatException("Product does not exists.");
+		}
+	}
+	
 	public void setProductAsReviewing(int id) throws Exception {
 		setProductStatus(id, StatusType.REVIEWING);
 	}

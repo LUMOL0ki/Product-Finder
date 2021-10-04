@@ -1,8 +1,6 @@
 package vsb.vea.data.stores;
 
-import vsb.vea.data.irepositories.ICategoryRepository;
-import vsb.vea.data.irepositories.IProductRepository;
-import vsb.vea.data.irepositories.ISupplierRepository;
+import vsb.vea.data.irepositories.*;
 import vsb.vea.models.Product;
 
 public class ProductFinderStore {
