@@ -31,4 +31,14 @@ public class SupplierService extends BaseService<Supplier, ISupplierRepository> 
 			throw new FormatException("Category name is in invalid format.");
 		}
 	}
+	
+	public void remove(int id) throws FormatException {
+		Supplier supplier = repository.findById(id);
+		if(supplier != null) {
+			repository.remove(supplier);
+		}
+		else {
+			throw new FormatException("Supplier does not exists.");
+		}
+	}
 }

@@ -6,6 +6,7 @@ import vsb.vea.data.irepositories.ICategoryRepository;
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.helpers.StringHelper;
 import vsb.vea.models.Category;
+import vsb.vea.models.Supplier;
 
 public class CategoryService extends BaseService<Category, ICategoryRepository> {
 	
@@ -29,6 +30,16 @@ public class CategoryService extends BaseService<Category, ICategoryRepository> 
 		}
 		else {
 			throw new FormatException("Category name is in invalid format.");
+		}
+	}
+
+	public void remove(int id) throws FormatException {
+		Category category = repository.findById(id);
+		if(category != null) {
+			repository.remove(category);
+		}
+		else {
+			throw new FormatException("Category does not exists.");
 		}
 	}
 }

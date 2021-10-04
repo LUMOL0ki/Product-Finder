@@ -9,4 +9,8 @@ public class Category {
 	public String description;
 	public List<Product> products;
 	public Date created;
+	
+	public Category() {
+		
+	}
 }
