@@ -5,12 +5,12 @@ import vsb.vea.data.irepositories.IProductRepository;
 import vsb.vea.data.irepositories.ISupplierRepository;
 import vsb.vea.models.Product;
 
-public class ProductStore {
+public class ProductFinderStore {
 	public IProductRepository productRepository;
 	public ICategoryRepository categoryRepository;
 	public ISupplierRepository supplierRepository;
 	
-	public ProductStore(
+	public ProductFinderStore(
 			IProductRepository productRepository, 
 			ICategoryRepository categoryRepository, 
 			ISupplierRepository supplierRepository) {
@@ -20,6 +20,18 @@ public class ProductStore {
 	}
 	
 	public void createProduct(Product product) {
+		
+	}
+	
+	public void beginTransaction() {
+		
+	}
+	
+	public void commitTransaction() {
+		
+	}
+	
+	public void rollback() {
 		
 	}
 }
