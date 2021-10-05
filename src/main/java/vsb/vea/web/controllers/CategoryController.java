@@ -25,10 +25,11 @@ public class CategoryController {
 		Category category = null;
 		try {
 			category = service.findById(id);
+			return category != null ? CategoryMapper.toCategoryDetail(category) : null;
 		} catch (FormatException e) {
 			e.printStackTrace(); //TODO: exception handler.
+			return null;
 		}
-		return category != null ? CategoryMapper.toCategoryDetail(category) : null;
 	}
 	
 	public List<CategoryBrief> findByName(String name){
@@ -36,8 +37,8 @@ public class CategoryController {
 			return CategoryMapper.toCategoryBrief(service.findByName(name));
 		} catch (FormatException e) {
 			e.printStackTrace(); //TODO: exception handler.
+			return null;
 		}
-		return null;
 	}
 	
 	public void create(CategoryInput category) throws FormatException {
