@@ -26,8 +26,8 @@ public class SupplierController {
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	public List<SupplierBrief> findByName(String name){
@@ -36,8 +36,8 @@ public class SupplierController {
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	public void create(SupplierInput supplier) {
