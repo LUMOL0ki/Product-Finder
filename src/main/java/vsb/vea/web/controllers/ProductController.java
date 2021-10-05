@@ -24,8 +24,8 @@ public class ProductController {
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	public List<ProductBrief> findByName(String name){
@@ -34,8 +34,8 @@ public class ProductController {
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	public ProductDetail findByEAN(String ean) {
@@ -44,8 +44,8 @@ public class ProductController {
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	public List<ProductBrief> findByNameOrEAN(String filter){
@@ -54,8 +54,8 @@ public class ProductController {
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	public void create(ProductInput product) {
