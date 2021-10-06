@@ -7,4 +7,5 @@ public interface IBaseRepository<T> {
 	void create(T entity);
 	void edit(T entity);
 	void remove(T entity);
+	int Count();
 }
