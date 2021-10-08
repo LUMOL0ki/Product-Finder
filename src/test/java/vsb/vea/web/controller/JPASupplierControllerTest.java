@@ -1,6 +1,6 @@
 package vsb.vea.web.controller;
 
-import vsb.vea.data.repositories.JPASupplierRepository;
+import vsb.vea.data.jpa.JPASupplierRepository;
 
 public class JPASupplierControllerTest extends SupplierControllerTest {
 

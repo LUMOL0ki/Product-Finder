@@ -1,32 +1,32 @@
-package vsb.vea.data.repositories;
+package vsb.vea.data.jpa;
 
 import java.util.List;
 
-import vsb.vea.data.irepositories.ISupplierRepository;
-import vsb.vea.models.Supplier;
+import vsb.vea.data.irepositories.ICategoryRepository;
+import vsb.vea.models.Category;
 
-public class JPASupplierRepository implements ISupplierRepository {
+public class JPACategoryRepository implements ICategoryRepository {
 
 	@Override
-	public List<Supplier> get() {
+	public List<Category> get() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void create(Supplier entity) {
+	public void create(Category entity) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void edit(Supplier entity) {
+	public void edit(Category entity) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void remove(Supplier entity) {
+	public void remove(Category entity) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -38,13 +38,13 @@ public class JPASupplierRepository implements ISupplierRepository {
 	}
 
 	@Override
-	public Supplier findById(int id) {
+	public Category findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Supplier> findByName(String name) {
+	public List<Category> findByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

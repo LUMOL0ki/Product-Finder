@@ -10,40 +10,44 @@ import java.util.ArrayList;
 public class CategoryMapper {
 	
 	public static Category fromCategoryBrief(CategoryBrief categoryBrief) {
-		Category category = new Category();
-		category.id = categoryBrief.id;
-		category.name = categoryBrief.name;
-		return category;
+		return new Category
+				(
+					categoryBrief.id, 
+					categoryBrief.name
+				);
 	}
 
 	public static Category fromCategoryDetail(CategoryDetail categoryDetail) {
-		Category category = new Category();
-		category.id = categoryDetail.id;
-		category.name = categoryDetail.name;
-		category.description = categoryDetail.description;
-		category.products = ProductMapper.fromProductBrief(categoryDetail.products);
-		return category;
+		return new Category
+				(
+					categoryDetail.id,
+					categoryDetail.name,
+					categoryDetail.description,
+					ProductMapper.fromProductBrief(categoryDetail.products)
+				);
 	}
 
 	public static Category fromCategoryInput(CategoryInput categoryInput) {
-		Category category = new Category();
-		category.name = categoryInput.name;
-		category.description = categoryInput.description;
-		return category;
+		return new Category
+				(
+					categoryInput.name, 
+					categoryInput.description
+				);
 	}
 	
 	public static Category fromCategoryInput(int id, CategoryInput categoryInput) {
-		Category category = new Category();
-		category.id = id;
-		category.name = categoryInput.name;
-		category.description = categoryInput.description;
-		return category;
+		return new Category
+				(
+					id, 
+					categoryInput.name, 
+					categoryInput.description
+				);
 	}
 	
 	public static CategoryBrief toCategoryBrief(Category category) {
 		CategoryBrief categoryBrief = new CategoryBrief();
-		categoryBrief.id = category.id;
-		categoryBrief.name = category.name;
+		categoryBrief.id = category.getId();
+		categoryBrief.name = category.getName();
 		return categoryBrief;
 	}
 	
@@ -57,17 +61,17 @@ public class CategoryMapper {
 	
 	public static CategoryDetail toCategoryDetail(Category category) {
 		CategoryDetail categoryDetail = new CategoryDetail();
-		categoryDetail.id = category.id;
-		categoryDetail.name = category.name;
-		categoryDetail.description = category.description;
-		categoryDetail.products = ProductMapper.toProductBrief(category.products);
+		categoryDetail.id = category.getId();
+		categoryDetail.name = category.getName();
+		categoryDetail.description = category.getDescription();
+		categoryDetail.products = ProductMapper.toProductBrief(category.getProducts());
 		return categoryDetail;
 	}
 	
 	public static CategoryInput toCategoryInput(Category category) {
 		CategoryInput categoryInput = new CategoryInput();
-		categoryInput.name = category.name;
-		categoryInput.description = category.description;
+		categoryInput.name = category.getName();
+		categoryInput.description = category.getDescription();
 		return categoryInput;
 	}
 }
