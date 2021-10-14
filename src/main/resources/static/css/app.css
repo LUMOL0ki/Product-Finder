@@ -1,0 +1,7 @@
+@import url('../css/icons/font/bootstrap-icons.css');
+@charset "UTF-8";
+
+ .top-row {
+ 	display: flex;
+ 	flex-direction: row;
+ }
