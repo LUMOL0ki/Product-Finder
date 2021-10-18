@@ -1,7 +1,91 @@
 @import url('../css/icons/font/bootstrap-icons.css');
 @charset "UTF-8";
 
+:root {
+	--rounded-element: 4px;
+	--rounded-container: 8px;
+}
+
+:root, light-theme {
+	--primary-bg-color: white;
+	--primary-text-color: black;
+	--primary-element-color: black;
+	--primary-element-hover-color: dimgray;
+	--primary-element-active-color: gray;
+	--primary-element-text-color: white;
+	
+	--secondary-bg-color: dimgray;
+	--secondary-text-color: black;
+	--secondary-element-color: gray;
+	--secondary-element-hover-color: dimgray;
+	--secondary-element-active-color: black;
+	
+	--transparent-element-color: gray;
+	--transparent-element-hover-color: dimgray;
+	--transparent-element-active-color: black;
+}
+
+html, body {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+}
+
  .top-row {
  	display: flex;
  	flex-direction: row;
  }
+ 
+ .top-row .logo {
+	width: 100%; 
+ }
+ 
+ .rounded-container {
+ 	border-radius: var(--rounded-container);
+ }
+ 
+ .index-layout {
+ 	display: flex;
+ 	flex-direction: column;
+ 	height: 100%;
+ }
+ 
+ .index-container {
+ 	display: flex;
+ 	flex-direction: column;
+ 	align-items: center;
+ 	justify-content: center;
+ 	width: 100%;
+ 	height: 100%;
+ }
+ 
+ .index-search-control {
+    display: flex;
+    align-items: center;
+ 	border-radius: var(--rounded-element);
+ 	background: var(--secondary-element-color);
+ }
+ 
+.index-search-control:hover {
+ 	background: var(--secondary-element-hover-color);
+ }
+ 
+.index-search-control:active {
+ 	background: var(--secondary-element-active-color);
+ }
+
+.index-search-control-icon {
+	padding: 0 8px;
+}
+ 	
+.index-search-control .index-search-control-input {
+    background: transparent;
+    padding: 8px 0;
+    border: none;
+}
+
+.index-search-control .index-search-control-input:focus {
+    outline: none;
+    box-shadow: none;
+}
