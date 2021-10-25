@@ -17,7 +17,7 @@ public class MockCategoryRepository implements ICategoryRepository {
 	@Override
 	public List<Category> get() {
 		// TODO Auto-generated method stub
-		return null;
+		return categories;
 	}
 
 	@Override
