@@ -2,21 +2,24 @@ package vsb.vea.data.mock;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import vsb.vea.data.irepositories.IProductRepository;
 import vsb.vea.models.Product;
 
+@Repository
 public class MockProductRepository implements IProductRepository {
 
+	private List<Product> products;
+	
 	@Override
 	public List<Product> get() {
-		// TODO Auto-generated method stub
-		return null;
+		return products;
 	}
 
 	@Override
 	public void create(Product entity) {
-		// TODO Auto-generated method stub
-		
+		products.add(entity);
 	}
 
 	@Override
@@ -27,8 +30,7 @@ public class MockProductRepository implements IProductRepository {
 
 	@Override
 	public void remove(Product entity) {
-		// TODO Auto-generated method stub
-		
+		//products.removeIf(p -> p.)
 	}
 
 	@Override

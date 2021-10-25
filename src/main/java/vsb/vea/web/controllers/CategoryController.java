@@ -2,6 +2,11 @@ package vsb.vea.web.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.models.Category;
 import vsb.vea.services.CategoryService;
@@ -10,18 +15,27 @@ import vsb.vea.web.models.CategoryBrief;
 import vsb.vea.web.models.CategoryDetail;
 import vsb.vea.web.models.CategoryInput;
 
+@Controller
 public class CategoryController {
+	
+	@Autowired
 	private CategoryService service;
+	
+	public CategoryController() {
+		
+	}
 	
 	public CategoryController(CategoryService service) {
 		this.service = service;
 	}
 	
+	@RequestMapping("/")	
 	public List<CategoryBrief> get(){
 		return CategoryMapper.toCategoryBrief(service.get());
 	}
-	
-	public CategoryDetail findById(int id) {
+
+	@RequestMapping("/find/{id}")
+	public CategoryDetail findById(@PathVariable int id) {
 		Category category = null;
 		try {
 			category = service.findById(id);
@@ -31,8 +45,9 @@ public class CategoryController {
 			return null;
 		}
 	}
-	
-	public List<CategoryBrief> findByName(String name){
+
+	@RequestMapping("/find/{name}")
+	public List<CategoryBrief> findByName(@PathVariable String name){
 		try {
 			return CategoryMapper.toCategoryBrief(service.findByName(name));
 		} catch (FormatException e) {
@@ -40,7 +55,8 @@ public class CategoryController {
 			return null;
 		}
 	}
-	
+
+	@RequestMapping("/create")
 	public void create(CategoryInput category) throws FormatException {
 		if(category != null) {
 			service.create(CategoryMapper.fromCategoryInput(category));
@@ -50,7 +66,8 @@ public class CategoryController {
 		}
 	}
 
-	public void edit(int id, CategoryInput category) throws FormatException {
+	@RequestMapping("/edit/{id}")
+	public void edit(@PathVariable int id, CategoryInput category) throws FormatException {
 		service.edit(null);
 		if(category != null) {
 			service.edit(CategoryMapper.fromCategoryInput(id, category));
@@ -60,7 +77,8 @@ public class CategoryController {
 		}
 	}
 
-	public void remove(int id) {
+	@RequestMapping("/remove/{id}")
+	public void remove(@PathVariable int id) {
 		try {
 			service.remove(id);
 		} catch (FormatException e) {

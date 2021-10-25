@@ -2,12 +2,15 @@ package vsb.vea.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import vsb.vea.data.irepositories.IProductRepository;
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.helpers.StringHelper;
 import vsb.vea.models.Product;
 import vsb.vea.models.StatusType;
 
+@Service
 public class ProductService extends BaseService<Product, IProductRepository> {
 
 	public ProductService(IProductRepository repository) {
@@ -18,7 +21,7 @@ public class ProductService extends BaseService<Product, IProductRepository> {
 		if(id > 0) {
 			Product product = repository.findById(id);
 			if(product != null) {
-				product.status = status;
+				product.setStatus(status);
 				repository.edit(product);
 			}
 			else {

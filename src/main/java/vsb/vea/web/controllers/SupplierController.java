@@ -2,6 +2,8 @@ package vsb.vea.web.controllers;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.services.SupplierService;
 import vsb.vea.web.mapper.SupplierMapper;
@@ -9,6 +11,7 @@ import vsb.vea.web.models.SupplierBrief;
 import vsb.vea.web.models.SupplierDetail;
 import vsb.vea.web.models.SupplierInput;
 
+@Service
 public class SupplierController {
 	private SupplierService service;
 	

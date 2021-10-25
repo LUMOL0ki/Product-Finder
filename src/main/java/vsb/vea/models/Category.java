@@ -3,8 +3,11 @@ package vsb.vea.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+
 public class Category {
 	private int id;
+	@NotEmpty(message = "name cannot be empty.")
 	private String name;
 	private String description;
 	private List<Product> products;
@@ -89,6 +92,9 @@ public class Category {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return name;
+	}
 }

@@ -2,10 +2,14 @@ package vsb.vea.data.mock;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Repository;
 
 import vsb.vea.data.irepositories.ICategoryRepository;
 import vsb.vea.models.Category;
 
+@Repository
 public class MockCategoryRepository implements ICategoryRepository {
 
 	private List<Category> categories;
@@ -16,44 +20,38 @@ public class MockCategoryRepository implements ICategoryRepository {
 	
 	@Override
 	public List<Category> get() {
-		// TODO Auto-generated method stub
 		return categories;
 	}
 
 	@Override
 	public void create(Category entity) {
 		// TODO Auto-generated method stub
-		
+		categories.add(entity);
 	}
 
 	@Override
 	public void edit(Category entity) {
-		// TODO Auto-generated method stub
-		
+		categories.set(categories.indexOf(findById(entity.getId())), entity);
 	}
 
 	@Override
 	public void remove(Category entity) {
-		// TODO Auto-generated method stub
-		
+		categories.removeIf(e -> e.getId() == entity.getId());
 	}
 
 	@Override
 	public int Count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return categories.size();
 	}
 
 	@Override
 	public Category findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return categories.stream().filter(c -> c.getId() == id).collect(Collectors.toList()).get(0);
 	}
 
 	@Override
 	public List<Category> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return categories.stream().filter(c -> c.getName().contains(name)).collect(Collectors.toList());
 	}
 
 }

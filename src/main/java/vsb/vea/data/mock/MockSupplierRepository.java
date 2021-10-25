@@ -2,9 +2,12 @@ package vsb.vea.data.mock;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import vsb.vea.data.irepositories.ISupplierRepository;
 import vsb.vea.models.Supplier;
 
+@Repository
 public class MockSupplierRepository implements ISupplierRepository {
 
 	@Override

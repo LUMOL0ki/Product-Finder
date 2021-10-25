@@ -2,10 +2,19 @@ package vsb.vea.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import vsb.vea.data.irepositories.IBaseRepository;
 
+@Service
 public class BaseService<T, TRepository extends IBaseRepository<T>> {
+	
 	protected TRepository repository;
+	
+	public BaseService() {
+		
+	}
 	
 	public BaseService(TRepository repository) {
 		this.repository = repository;

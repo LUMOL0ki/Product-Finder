@@ -8,10 +8,11 @@ import vsb.vea.web.models.*;
 
 public class ProductMapper {
 	public static Product fromProductBrief(ProductBrief productBrief) {
-		Product product = new Product();
-		product.id = productBrief.id;
-		product.name = productBrief.name;
-		product.ean = productBrief.ean;
+		Product product = new Product(
+				productBrief.id,
+				productBrief.name,
+				productBrief.ean
+				);
 		return product;
 	}
 	
@@ -24,42 +25,45 @@ public class ProductMapper {
 	}
 	
 	public static Product fromProductDetail(ProductDetail productDetail) {
-		Product product = new Product();
-		product.id = productDetail.id;
-		product.name = productDetail.name;
-		product.description = productDetail.description;
-		product.ean = productDetail.ean;
-		product.supplier = SupplierMapper.fromSupplierBrief(productDetail.supplier);
-		product.category = CategoryMapper.fromCategoryBrief(productDetail.category);
+		Product product = new Product(
+				productDetail.id,
+				productDetail.name,
+				productDetail.description,
+				productDetail.ean,
+				SupplierMapper.fromSupplierBrief(productDetail.supplier),
+				CategoryMapper.fromCategoryBrief(productDetail.category)
+				);
 		return product;
 	}
 	
 	public static Product fromProductInput(ProductInput productInput) {
-		Product product = new Product();
-		product.name = productInput.name;
-		product.description = productInput.description;
-		product.ean = productInput.ean;
-		product.supplierId = productInput.supplierId;
-		product.categoryId = productInput.categoryId;
+		Product product = new Product(
+				productInput.name,
+				productInput.description,
+				productInput.ean,
+				productInput.supplierId,
+				productInput.categoryId
+				);
 		return product;
 	}
 
 	public static Product fromProductInput(int id, ProductInput productInput) {
-		Product product = new Product();
-		product.id = id;
-		product.name = productInput.name;
-		product.description = productInput.description;
-		product.ean = productInput.ean;
-		product.supplierId = productInput.supplierId;
-		product.categoryId = productInput.categoryId;
+		Product product = new Product(
+				id,
+				productInput.name,
+				productInput.description,
+				productInput.ean,
+				productInput.supplierId,
+				productInput.categoryId
+				);
 		return product;
 	}
 	
 	public static ProductBrief toProductBrief(Product product) {
 		ProductBrief productBrief = new ProductBrief();
-		productBrief.id = product.id;
-		productBrief.name = product.name;
-		productBrief.ean = product.ean;
+		productBrief.id = product.getId();
+		productBrief.name = product.getName();
+		productBrief.ean = product.getEan();
 		return productBrief;
 	}
 
@@ -73,22 +77,22 @@ public class ProductMapper {
 	
 	public static ProductDetail toProductDetail(Product product) {
 		ProductDetail productDetail = new ProductDetail();
-		productDetail.id = product.id;
-		productDetail.name = product.name;
-		productDetail.description = product.description;
-		productDetail.ean = product.ean;
-		productDetail.supplier = SupplierMapper.toSupplierBrief(product.supplier);
-		productDetail.category = CategoryMapper.toCategoryBrief(product.category);
+		productDetail.id = product.getId();
+		productDetail.name = product.getName();
+		productDetail.description = product.getDescription();
+		productDetail.ean = product.getEan();
+		productDetail.supplier = SupplierMapper.toSupplierBrief(product.getSupplier());
+		productDetail.category = CategoryMapper.toCategoryBrief(product.getCategory());
 		return productDetail;
 	}
 	
 	public static ProductInput toProductInput(Product product) {
 		ProductInput productInput = new ProductInput();
-		productInput.name = product.name;
-		productInput.description = product.description;
-		productInput.ean = product.ean;
-		productInput.supplierId = product.supplierId;
-		productInput.categoryId = product.categoryId;
+		productInput.name = product.getName();
+		productInput.description = product.getDescription();
+		productInput.ean = product.getEan();
+		productInput.supplierId = product.getSupplierId();
+		productInput.categoryId = product.getCategoryId();
 		return productInput;
 	}
 }
