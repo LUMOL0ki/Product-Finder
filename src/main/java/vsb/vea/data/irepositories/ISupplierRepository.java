@@ -8,6 +8,5 @@ import vsb.vea.models.Supplier;
 
 @Repository
 public interface ISupplierRepository extends IBaseRepository<Supplier> {
-	Supplier findById(int id);
 	List<Supplier> findByName(String name);
 }

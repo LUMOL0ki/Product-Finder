@@ -21,7 +21,7 @@ public class CategoryService extends BaseService<Category, ICategoryRepository> 
 	public CategoryService(ICategoryRepository repository) {
 		super(repository);
 	}
-	
+		
 	public Category findById(int id) throws FormatException {
 		if(id > 0) {
 			Category category = repository.findById(id);

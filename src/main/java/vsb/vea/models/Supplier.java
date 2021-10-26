@@ -3,8 +3,7 @@ package vsb.vea.models;
 import java.util.Date;
 import java.util.List;
 
-public class Supplier {
-	private int id;
+public class Supplier extends BaseEntity {
 	private String name;
 	private String description;
 	private int addressId;
@@ -46,12 +45,6 @@ public class Supplier {
 		this.web = web;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
