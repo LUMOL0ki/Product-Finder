@@ -1,6 +1,10 @@
 package vsb.vea.data.mock;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +15,16 @@ import vsb.vea.models.Product;
 public class MockProductRepository implements IProductRepository {
 
 	private List<Product> products;
+		
+	public MockProductRepository() {
+		super();
+		products = new ArrayList<Product>();
+	}
+
+	@PostConstruct
+	private void initialize() {
+		
+	}
 	
 	@Override
 	public List<Product> get() {
@@ -24,43 +38,38 @@ public class MockProductRepository implements IProductRepository {
 
 	@Override
 	public void edit(Product entity) {
-		// TODO Auto-generated method stub
-		
+		products.set(products.indexOf(findById(entity.getId())), entity);
 	}
 
 	@Override
 	public void remove(Product entity) {
-		//products.removeIf(p -> p.)
+		products.removeIf(p -> p.getId() == entity.getId());
 	}
 
 	@Override
 	public int Count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return products.size();
 	}
 
 	@Override
 	public Product findById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return products.stream().filter(p -> p.getId() == id).collect(Collectors.toList()).get(0);
 	}
 
 	@Override
 	public List<Product> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return products.stream().filter(p -> p.getName().contains(name)).collect(Collectors.toList());
 	}
 
 	@Override
 	public Product findByEAN(String ean) {
-		// TODO Auto-generated method stub
-		return null;
+		return products.stream().filter(p -> p.getEan() == ean).collect(Collectors.toList()).get(0);
 	}
 
 	@Override
 	public List<Product> findByNameOrEAN(String filter) {
-		// TODO Auto-generated method stub
-		return null;
+		return products.stream().filter(p -> p.getEan() == filter || p.getName().contains(filter)).collect(Collectors.toList());
 	}
 
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Repository;
 
 import vsb.vea.data.irepositories.ICategoryRepository;
@@ -15,7 +17,17 @@ public class MockCategoryRepository implements ICategoryRepository {
 	private List<Category> categories;
 
 	public MockCategoryRepository() {
+		super();
 		categories = new ArrayList<Category>();
+	}
+
+	@PostConstruct
+	private void initialize() {
+		categories.add(new Category(1, "A"));
+		categories.add(new Category(2, "B"));
+		categories.add(new Category(3, "C"));
+		categories.add(new Category(4, "D"));
+		categories.add(new Category(5, "E"));
 	}
 	
 	@Override
@@ -25,7 +37,6 @@ public class MockCategoryRepository implements ICategoryRepository {
 
 	@Override
 	public void create(Category entity) {
-		// TODO Auto-generated method stub
 		categories.add(entity);
 	}
 

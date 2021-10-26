@@ -1,6 +1,11 @@
 package vsb.vea.data.mock;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,46 +15,52 @@ import vsb.vea.models.Supplier;
 @Repository
 public class MockSupplierRepository implements ISupplierRepository {
 
+	private List<Supplier> suppliers;
+		
+	public MockSupplierRepository() {
+		super();
+		suppliers = new ArrayList<Supplier>();		
+	}
+
+	@PostConstruct
+	private void initialize() {
+		
+	}
+	
 	@Override
 	public List<Supplier> get() {
-		// TODO Auto-generated method stub
-		return null;
+		return suppliers;
 	}
 
 	@Override
 	public void create(Supplier entity) {
-		// TODO Auto-generated method stub
-		
+		suppliers.add(entity);
 	}
 
 	@Override
 	public void edit(Supplier entity) {
-		// TODO Auto-generated method stub
-		
+		suppliers.set(suppliers.indexOf(findById(entity.getId())), entity);
 	}
 
 	@Override
 	public void remove(Supplier entity) {
-		// TODO Auto-generated method stub
-		
+		suppliers.removeIf(s -> s.getId() == entity.getId());
 	}
 
 	@Override
 	public int Count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return suppliers.size();
 	}
 
 	@Override
 	public Supplier findById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return suppliers.stream().filter(s -> s.getId() == id).collect(Collectors.toList()).get(0);
 	}
 
 	@Override
 	public List<Supplier> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return suppliers.stream().filter(s -> s.getName().contains(name)).collect(Collectors.toList());
 	}
 
 }

@@ -10,9 +10,10 @@ import vsb.vea.web.models.SupplierInput;
 
 public class SupplierMapper {
 	public static Supplier fromSupplierBrief(SupplierBrief supplierBrief) {
-		Supplier supplier = new Supplier();
-		supplier.id = supplierBrief.id;
-		supplier.name = supplierBrief.name;
+		Supplier supplier = new Supplier(
+				supplierBrief.id,
+				supplierBrief.name
+				);
 		return supplier;
 	}
 	
@@ -25,28 +26,30 @@ public class SupplierMapper {
 	}
 	
 	public static Supplier fromSupplierDetail(SupplierDetail supplierDetail) {
-		Supplier supplier = new Supplier();
-		supplier.id = supplierDetail.id;
-		supplier.name = supplierDetail.name;
-		supplier.description = supplierDetail.description;
-		supplier.address = AddressMapper.fromAddressDetail(supplierDetail.address);
-		supplier.web = supplierDetail.web;
+		Supplier supplier = new Supplier(
+				supplierDetail.id, 
+				supplierDetail.name, 
+				supplierDetail.description, 
+				AddressMapper.fromAddressDetail(supplierDetail.address), 
+				supplierDetail.web
+				);
 		return supplier;
 	}
 	
 	public static Supplier fromSupplierInput(SupplierInput supplierInput) {
-		Supplier supplier = new Supplier();
-		supplier.name = supplierInput.name;
-		supplier.description = supplierInput.description;
-		supplier.address = AddressMapper.fromAddressInput(supplierInput.address);
-		supplier.web = supplierInput.web;
+		Supplier supplier = new Supplier(
+				supplierInput.name,
+				supplierInput.description,
+				AddressMapper.fromAddressInput(supplierInput.address),
+				supplierInput.web
+				);
 		return supplier;
 	}
 	
 	public static SupplierBrief toSupplierBrief(Supplier supplier) {
 		SupplierBrief supplierBrief = new SupplierBrief();
-		supplierBrief.id = supplier.id;
-		supplierBrief.name = supplier.name;
+		supplierBrief.id = supplier.getId();
+		supplierBrief.name = supplier.getName();
 		return supplierBrief;
 	}
 
@@ -60,20 +63,20 @@ public class SupplierMapper {
 	
 	public static SupplierDetail toSupplierDetail(Supplier supplier) {
 		SupplierDetail supplierDetail = new SupplierDetail();
-		supplierDetail.id = supplier.id;
-		supplierDetail.name = supplier.name;
-		supplierDetail.description = supplier.description;
-		supplierDetail.address = AddressMapper.toAddressDetail(supplier.address);
-		supplierDetail.web = supplier.web;
+		supplierDetail.id = supplier.getId();
+		supplierDetail.name = supplier.getName();
+		supplierDetail.description = supplier.getDescription();
+		supplierDetail.address = AddressMapper.toAddressDetail(supplier.getAddress());
+		supplierDetail.web = supplier.getWeb();
 		return supplierDetail;
 	}
 	
 	public static SupplierInput toSupplierInput(Supplier supplier) {
 		SupplierInput supplierInput = new SupplierInput();
-		supplierInput.name = supplier.name;
-		supplierInput.description = supplier.description;
-		supplierInput.address = AddressMapper.toAddressInput(supplier.address);
-		supplierInput.web = supplier.web;
+		supplierInput.name = supplier.getName();
+		supplierInput.description = supplier.getDescription();
+		supplierInput.address = AddressMapper.toAddressInput(supplier.getAddress());
+		supplierInput.web = supplier.getWeb();
 		return supplierInput;
 	}
 }

@@ -3,16 +3,16 @@ package vsb.vea.models;
 import java.util.Date;
 
 public class Item {
-	private int id;
-	private String name;
-	private String description;
-	private String ean;
-	private int supplierId;
-	private Supplier supplier;
-	private int categoryId;
-	private Category category;
-	private StatusType status;
-	private Date created;
+	protected int id;
+	protected String name;
+	protected String description;
+	protected String ean;
+	protected int supplierId;
+	protected Supplier supplier;
+	protected int categoryId;
+	protected Category category;
+	protected StatusType status;
+	protected Date created;
 		
 	public Item() {
 		super();
