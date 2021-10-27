@@ -14,9 +14,9 @@ public class JdbcSupplierRepository implements ISupplierRepository {
 	}
 
 	@Override
-	public void create(Supplier entity) {
+	public Supplier create(Supplier entity) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
@@ -32,13 +32,13 @@ public class JdbcSupplierRepository implements ISupplierRepository {
 	}
 
 	@Override
-	public int Count() {
+	public int count() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public Supplier findById(int id) {
+	public Supplier findById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

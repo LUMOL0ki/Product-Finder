@@ -10,10 +10,10 @@ import vsb.vea.data.irepositories.IBaseRepository;
 import vsb.vea.models.BaseEntity;
 
 @Repository
-public abstract class MockBaseRepository<T extends BaseEntity> implements IBaseRepository<T>{
+public abstract class MockBaseRepository<T extends BaseEntity<Long>> implements IBaseRepository<T>{
 	
 	protected List<T> entities;
-	protected int index = 1;
+	protected long index = 1;
 	
 	public MockBaseRepository() {
 		entities = new ArrayList<T>();
@@ -27,7 +27,7 @@ public abstract class MockBaseRepository<T extends BaseEntity> implements IBaseR
 	}	
 
 	@Override
-	public T findById(int id) {
+	public T findById(long id) {
 		List<T> tempEntities = entities.stream().filter(c -> c.getId() == id).collect(Collectors.toList());
 		if(tempEntities.size() > 0) {
 			return tempEntities.get(0);
@@ -38,10 +38,11 @@ public abstract class MockBaseRepository<T extends BaseEntity> implements IBaseR
 	}
 	
 	@Override
-	public void create(T entity) {
+	public T create(T entity) {
 		entity.setId(index);
 		entities.add(entity);
 		index++;
+		return this.findById(entity.getId());
 	}
 
 	@Override
@@ -52,11 +53,10 @@ public abstract class MockBaseRepository<T extends BaseEntity> implements IBaseR
 	@Override
 	public void remove(T entity) {
 		entities.remove(entity);
-		//entities.removeIf(e -> e.getId() == entity.getId());
 	}
 
 	@Override
-	public int Count() {
+	public int count() {
 		return entities.size();
 	}
 }

@@ -14,9 +14,9 @@ public class JdbcProductRepository implements IProductRepository {
 	}
 
 	@Override
-	public void create(Product entity) {
+	public Product create(Product entity) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
@@ -32,13 +32,13 @@ public class JdbcProductRepository implements IProductRepository {
 	}
 
 	@Override
-	public int Count() {
+	public int count() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public Product findById(int id) {
+	public Product findById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

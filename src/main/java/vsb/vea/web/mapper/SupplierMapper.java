@@ -1,7 +1,7 @@
 package vsb.vea.web.mapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import vsb.vea.models.Supplier;
 import vsb.vea.web.models.SupplierBrief;
@@ -9,74 +9,37 @@ import vsb.vea.web.models.SupplierDetail;
 import vsb.vea.web.models.SupplierInput;
 
 public class SupplierMapper {
+
+    @Autowired
+    private static ModelMapper modelMapper = new ModelMapper();
+    
 	public static Supplier fromSupplierBrief(SupplierBrief supplierBrief) {
-		Supplier supplier = new Supplier(
-				supplierBrief.id,
-				supplierBrief.name
-				);
-		return supplier;
-	}
-	
-	public static List<Supplier> fromSupplierBrief(List<SupplierBrief> supplierBriefs){
-		List<Supplier> suppliers = new ArrayList<Supplier>();
-		for(SupplierBrief supplierBrief : supplierBriefs) {
-			suppliers.add(fromSupplierBrief(supplierBrief));
-		}
-		return suppliers;
+		return modelMapper.map(supplierBrief, Supplier.class);
 	}
 	
 	public static Supplier fromSupplierDetail(SupplierDetail supplierDetail) {
-		Supplier supplier = new Supplier(
-				supplierDetail.id, 
-				supplierDetail.name, 
-				supplierDetail.description, 
-				AddressMapper.fromAddressDetail(supplierDetail.address), 
-				supplierDetail.web
-				);
-		return supplier;
+		return modelMapper.map(supplierDetail, Supplier.class);
 	}
 	
 	public static Supplier fromSupplierInput(SupplierInput supplierInput) {
-		Supplier supplier = new Supplier(
-				supplierInput.name,
-				supplierInput.description,
-				AddressMapper.fromAddressInput(supplierInput.address),
-				supplierInput.web
-				);
-		return supplier;
+		return modelMapper.map(supplierInput, Supplier.class);
+	}
+
+	public static Supplier fromSupplierInput(long id, SupplierInput supplierInput) {
+		Supplier tempSupplier = modelMapper.map(supplierInput, Supplier.class);
+		tempSupplier.setId(id);
+		return tempSupplier;
 	}
 	
 	public static SupplierBrief toSupplierBrief(Supplier supplier) {
-		SupplierBrief supplierBrief = new SupplierBrief();
-		supplierBrief.id = supplier.getId();
-		supplierBrief.name = supplier.getName();
-		return supplierBrief;
-	}
-
-	public static List<SupplierBrief> toSupplierBrief(List<Supplier> suppliers){
-		List<SupplierBrief> supplierBriefs = new ArrayList<SupplierBrief>();
-		for(Supplier supplier : suppliers) {
-			supplierBriefs.add(SupplierMapper.toSupplierBrief(supplier));
-		}
-		return supplierBriefs;
+		return modelMapper.map(supplier, SupplierBrief.class);
 	}
 	
 	public static SupplierDetail toSupplierDetail(Supplier supplier) {
-		SupplierDetail supplierDetail = new SupplierDetail();
-		supplierDetail.id = supplier.getId();
-		supplierDetail.name = supplier.getName();
-		supplierDetail.description = supplier.getDescription();
-		supplierDetail.address = AddressMapper.toAddressDetail(supplier.getAddress());
-		supplierDetail.web = supplier.getWeb();
-		return supplierDetail;
+		return modelMapper.map(supplier, SupplierDetail.class);
 	}
 	
 	public static SupplierInput toSupplierInput(Supplier supplier) {
-		SupplierInput supplierInput = new SupplierInput();
-		supplierInput.name = supplier.getName();
-		supplierInput.description = supplier.getDescription();
-		supplierInput.address = AddressMapper.toAddressInput(supplier.getAddress());
-		supplierInput.web = supplier.getWeb();
-		return supplierInput;
+		return modelMapper.map(supplier, SupplierInput.class);
 	}
 }

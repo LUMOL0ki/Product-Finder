@@ -22,7 +22,7 @@ public class CategoryService extends BaseService<Category, ICategoryRepository> 
 		super(repository);
 	}
 		
-	public Category findById(int id) throws FormatException {
+	public Category findById(long id) throws FormatException {
 		if(id > 0) {
 			Category category = repository.findById(id);
 			return category == null ? null : category;	
@@ -41,7 +41,7 @@ public class CategoryService extends BaseService<Category, ICategoryRepository> 
 		}
 	}
 
-	public void remove(int id) throws FormatException {
+	public void remove(long id) throws FormatException {
 		Category category = repository.findById(id);
 		if(category != null) {
 			repository.remove(category);

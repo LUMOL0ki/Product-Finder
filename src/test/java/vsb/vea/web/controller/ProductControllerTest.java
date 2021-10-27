@@ -3,41 +3,98 @@ package vsb.vea.web.controller;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import vsb.vea.data.irepositories.IProductRepository;
+import vsb.vea.exceptions.FormatException;
 import vsb.vea.services.ProductService;
 import vsb.vea.web.controllers.ProductController;
+import vsb.vea.web.models.ProductBrief;
+import vsb.vea.web.models.ProductInput;
 
-public class ProductControllerTest {
+public abstract class ProductControllerTest {
 
-	protected ProductController productController;
+	protected ProductController controller;
+	protected ProductService service;
+	protected IProductRepository repository;
 	
 	public ProductControllerTest(IProductRepository productRepository) {
-		productController = new ProductController(new ProductService(productRepository));
+		this.repository = productRepository;
+		service = new ProductService(this.repository);
+		controller = new ProductController(service);
 	}
 	
 	@Test
 	public void Get() {
-		assertTrue(false);
+		assertTrue(controller.get().size() == repository.count());
 	}
 
-	public void FindById(int id) {
-		
+	@ParameterizedTest
+	@ValueSource(ints = {-1, 0, 1, Integer.MAX_VALUE})
+	public void FindById(long id) {
+		if(id <= 0) {
+			assertTrue(controller.findById(id) == null);
+		}
+		else {
+			for(ProductBrief product : controller.get()) {
+				if(product.getId() == id) {
+					assertTrue(controller.findById(id) != null);					
+				}
+			}
+		}
 	}
 
+	@ParameterizedTest
+	@NullAndEmptySource
+	@ValueSource(strings = {"", " ", "A", "SSDDSFDDFDF"})
 	public void FindByName(String name) {
-		
+		if(name == null || name == "" || name == " ") {
+			assertTrue(controller.findByName(name) == null);
+		}
+		else if(name.length() > 0) {
+			assertTrue(controller.findByName(name).size() >= 0);
+		}
 	}
 	
-	public void Create() {
-		
+	@Test
+	public void Create() throws FormatException {
+		int before = repository.count();
+		ProductInput productInput = new ProductInput();
+		productInput.name = "test";
+		productInput.description = null;
+		controller.create(productInput);
+		int after = repository.count();
+		assertTrue(before < after);
 	}
 	
-	public void Edit() {
+	public void Edit() throws FormatException {
+		int before = repository.count();
+		ProductInput productInput = new ProductInput();
+		productInput.name = "test";
+		productInput.description = null;
+		controller.edit(1, productInput);
+		int after = repository.count();
 		
+		assertTrue(before == after && controller.findById(1).name == productInput.name);
 	}
 	
-	public void Remove() {
-		
+	@ParameterizedTest
+	@ValueSource(ints = {-1, 0, 1, 4, Integer.MAX_VALUE})
+	public void Remove(long id) {
+		int before = repository.count();
+		controller.remove(id);
+		int after = repository.count();
+		if(id <= 0) {
+			assertTrue("not removed", before == after);
+		}
+		else {
+			for(ProductBrief product : controller.get()) {
+				if(product.getId() == id) {
+					assertTrue("not removed", before > after);					
+				}
+			}
+		}
 	}
 }

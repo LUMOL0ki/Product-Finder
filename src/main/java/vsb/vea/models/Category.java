@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
-public class Category extends BaseEntity {
+public class Category extends BaseEntity<Long> {
 	@NotEmpty(message = "name cannot be empty.")
 	private String name;
 	private String description;
@@ -27,20 +27,20 @@ public class Category extends BaseEntity {
 		this.description = description;
 	}
 
-	public Category(int id, String name) {
+	public Category(long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 	
-	public Category(int id, String name, String description) {
+	public Category(long id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 	}
 	
-	public Category(int id, String name, String description, List<Product> products) {
+	public Category(long id, String name, String description, List<Product> products) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -48,7 +48,7 @@ public class Category extends BaseEntity {
 		this.products = products;
 	}
 	
-	public Category(int id, String name, String description, List<Product> products, Date created) {
+	public Category(long id, String name, String description, List<Product> products, Date created) {
 		super();
 		this.id = id;
 		this.name = name;

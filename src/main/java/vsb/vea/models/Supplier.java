@@ -3,16 +3,20 @@ package vsb.vea.models;
 import java.util.Date;
 import java.util.List;
 
-public class Supplier extends BaseEntity {
+public class Supplier extends BaseEntity<Long> {
 	private String name;
 	private String description;
-	private int addressId;
+	private long addressId;
 	private Address address;
 	private String web;
 	private List<Product> products;
 	private Date created;
 	
-	public Supplier(int id, String name) {
+	public Supplier() {
+		
+	}
+	
+	public Supplier(long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -26,7 +30,7 @@ public class Supplier extends BaseEntity {
 		this.web = web;
 	}
 	
-	public Supplier(int id, String name, String description, Address address, String web) {
+	public Supplier(long id, String name, String description, Address address, String web) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -35,7 +39,7 @@ public class Supplier extends BaseEntity {
 		this.web = web;
 	}
 
-	public Supplier(int id, String name, String description, int addressId, Address address, String web) {
+	public Supplier(long id, String name, String description, long addressId, Address address, String web) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -57,10 +61,10 @@ public class Supplier extends BaseEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getAddressId() {
+	public long getAddressId() {
 		return addressId;
 	}
-	public void setAddressId(int addressId) {
+	public void setAddressId(long addressId) {
 		this.addressId = addressId;
 	}
 	public Address getAddress() {

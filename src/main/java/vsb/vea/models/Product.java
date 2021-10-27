@@ -9,23 +9,23 @@ public class Product extends Item{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Product(int id, String name) {
+	public Product(long id, String name) {
 		super(id, name);
 		// TODO Auto-generated constructor stub
 	}
 		
-	public Product(int id, String name, String ean) {
+	public Product(long id, String name, String ean) {
 		super(id, name, ean);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(int id, String name, String description, String ean, int supplierId, int categoryId,
+	public Product(long id, String name, String description, String ean, int supplierId, int categoryId,
 			StatusType status) {
 		super(id, name, description, ean, supplierId, categoryId, status);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Product(int id, String name, String description, String ean, int supplierId, int categoryId) {
+	public Product(long id, String name, String description, String ean, int supplierId, int categoryId) {
 		super(id, name, description, ean, supplierId, categoryId);
 		// TODO Auto-generated constructor stub
 	}
@@ -35,12 +35,12 @@ public class Product extends Item{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(int id, String name, String description, String ean, Supplier supplier, Category category) {
+	public Product(long id, String name, String description, String ean, Supplier supplier, Category category) {
 		super(id, name, description, ean, supplier, category);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(int id, String name, String description, String ean, int supplierId, Supplier supplier,
+	public Product(long id, String name, String description, String ean, int supplierId, Supplier supplier,
 			int categoryId, Category category, StatusType status, Date created) {
 		super(id, name, description, ean, supplierId, supplier, categoryId, category, status, created);
 		// TODO Auto-generated constructor stub

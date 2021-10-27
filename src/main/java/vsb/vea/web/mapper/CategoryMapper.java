@@ -4,74 +4,45 @@ import vsb.vea.models.Category;
 import vsb.vea.web.models.CategoryBrief;
 import vsb.vea.web.models.CategoryDetail;
 import vsb.vea.web.models.CategoryInput;
-import java.util.List;
-import java.util.ArrayList;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CategoryMapper {
-	
+
+    @Autowired
+    private static ModelMapper modelMapper = new ModelMapper();
+    
 	public static Category fromCategoryBrief(CategoryBrief categoryBrief) {
-		return new Category
-				(
-					categoryBrief.id, 
-					categoryBrief.name
-				);
+		
+		return modelMapper.map(categoryBrief, Category.class);
 	}
 
 	public static Category fromCategoryDetail(CategoryDetail categoryDetail) {
-		return new Category
-				(
-					categoryDetail.id,
-					categoryDetail.name,
-					categoryDetail.description,
-					ProductMapper.fromProductBrief(categoryDetail.products)
-				);
+		
+		return modelMapper.map(categoryDetail, Category.class);
 	}
 
 	public static Category fromCategoryInput(CategoryInput categoryInput) {
-		return new Category
-				(
-					categoryInput.name, 
-					categoryInput.description
-				);
+		
+		return modelMapper.map(categoryInput, Category.class);
 	}
 	
-	public static Category fromCategoryInput(int id, CategoryInput categoryInput) {
-		return new Category
-				(
-					id, 
-					categoryInput.name, 
-					categoryInput.description
-				);
+	public static Category fromCategoryInput(long id, CategoryInput categoryInput) {
+		Category tempCategory = modelMapper.map(categoryInput, Category.class);
+		tempCategory.setId(id);
+		return tempCategory;
 	}
 	
 	public static CategoryBrief toCategoryBrief(Category category) {
-		CategoryBrief categoryBrief = new CategoryBrief();
-		categoryBrief.id = category.getId();
-		categoryBrief.name = category.getName();
-		return categoryBrief;
-	}
-	
-	public static List<CategoryBrief> toCategoryBrief(List<Category> categories){
-		List<CategoryBrief> categoryBriefs = new ArrayList<CategoryBrief>();
-		for(Category category : categories) {
-			categoryBriefs.add(toCategoryBrief(category));
-		}
-		return categoryBriefs;
+		return modelMapper.map(category, CategoryBrief.class);
 	}
 	
 	public static CategoryDetail toCategoryDetail(Category category) {
-		CategoryDetail categoryDetail = new CategoryDetail();
-		categoryDetail.id = category.getId();
-		categoryDetail.name = category.getName();
-		categoryDetail.description = category.getDescription();
-		categoryDetail.products = ProductMapper.toProductBrief(category.getProducts());
-		return categoryDetail;
+		return modelMapper.map(category, CategoryDetail.class);
 	}
 	
 	public static CategoryInput toCategoryInput(Category category) {
-		CategoryInput categoryInput = new CategoryInput();
-		categoryInput.name = category.getName();
-		categoryInput.description = category.getDescription();
-		return categoryInput;
+		return modelMapper.map(category, CategoryInput.class);
 	}
 }

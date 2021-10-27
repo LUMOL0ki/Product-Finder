@@ -17,7 +17,7 @@ public class ProductService extends BaseService<Product, IProductRepository> {
 		super(repository);
 	}
 
-	private void setProductStatus(int id, StatusType status) throws Exception {
+	private void setProductStatus(long id, StatusType status) throws Exception {
 		if(id > 0) {
 			Product product = repository.findById(id);
 			if(product != null) {
@@ -33,7 +33,7 @@ public class ProductService extends BaseService<Product, IProductRepository> {
 		}
 	}
 	
-	public Product findById(int id) throws FormatException {
+	public Product findById(long id) throws FormatException {
 		if(id > 0) {
 			Product product = repository.findById(id);
 			return product == null ? null : product;	
@@ -70,7 +70,7 @@ public class ProductService extends BaseService<Product, IProductRepository> {
 		}
 	}
 	
-	public void remove(int id) throws FormatException {
+	public void remove(long id) throws FormatException {
 		Product product = repository.findById(id);
 		if(product != null) {
 			repository.remove(product);
@@ -80,15 +80,15 @@ public class ProductService extends BaseService<Product, IProductRepository> {
 		}
 	}
 	
-	public void setProductAsReviewing(int id) throws Exception {
+	public void setProductAsReviewing(long id) throws Exception {
 		setProductStatus(id, StatusType.REVIEWING);
 	}
 	
-	public void setProductAsApproved(int id) throws Exception {
+	public void setProductAsApproved(long id) throws Exception {
 		setProductStatus(id, StatusType.APPROVED);
 	}
 	
-	public void setProductAsRejected(int id) throws Exception {
+	public void setProductAsRejected(long id) throws Exception {
 		setProductStatus(id, StatusType.REJECTED);
 	}
 }

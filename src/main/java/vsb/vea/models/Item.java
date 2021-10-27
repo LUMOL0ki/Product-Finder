@@ -2,13 +2,13 @@ package vsb.vea.models;
 
 import java.util.Date;
 
-public class Item extends BaseEntity {
+public class Item extends BaseEntity<Long> {
 	protected String name;
 	protected String description;
 	protected String ean;
-	protected int supplierId;
+	protected long supplierId;
 	protected Supplier supplier;
-	protected int categoryId;
+	protected long categoryId;
 	protected Category category;
 	protected StatusType status;
 	protected Date created;
@@ -17,20 +17,20 @@ public class Item extends BaseEntity {
 		super();
 	}
 
-	public Item(int id, String name) {
+	public Item(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 		
-	public Item(int id, String name, String ean) {
+	public Item(Long id, String name, String ean) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.ean = ean;
 	}
 
-	public Item(int id, String name, String description, String ean, int supplierId, int categoryId,
+	public Item(Long id, String name, String description, String ean, long supplierId, long categoryId,
 			StatusType status) {
 		super();
 		this.id = id;
@@ -42,7 +42,7 @@ public class Item extends BaseEntity {
 		this.status = status;
 	}
 		
-	public Item(String name, String description, String ean, int supplierId, int categoryId) {
+	public Item(String name, String description, String ean, long supplierId, long categoryId) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -51,7 +51,7 @@ public class Item extends BaseEntity {
 		this.categoryId = categoryId;
 	}
 
-	public Item(int id, String name, String description, String ean, Supplier supplier, Category category) {
+	public Item(Long id, String name, String description, String ean, Supplier supplier, Category category) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -61,7 +61,7 @@ public class Item extends BaseEntity {
 		this.category = category;
 	}
 		
-	public Item(int id, String name, String description, String ean, int supplierId, int categoryId) {
+	public Item(Long id, String name, String description, String ean, int supplierId, int categoryId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -71,7 +71,7 @@ public class Item extends BaseEntity {
 		this.categoryId = categoryId;
 	}
 
-	public Item(int id, String name, String description, String ean, int supplierId, Supplier supplier, int categoryId,
+	public Item(Long id, String name, String description, String ean, int supplierId, Supplier supplier, int categoryId,
 			Category category, StatusType status, Date created) {
 		super();
 		this.id = id;
@@ -104,10 +104,10 @@ public class Item extends BaseEntity {
 	public void setEan(String ean) {
 		this.ean = ean;
 	}
-	public int getSupplierId() {
+	public long getSupplierId() {
 		return supplierId;
 	}
-	public void setSupplierId(int supplierId) {
+	public void setSupplierId(long supplierId) {
 		this.supplierId = supplierId;
 	}
 	public Supplier getSupplier() {
@@ -116,10 +116,10 @@ public class Item extends BaseEntity {
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
-	public int getCategoryId() {
+	public long getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
 	public Category getCategory() {

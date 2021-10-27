@@ -13,7 +13,7 @@ public class SupplierService extends BaseService<Supplier, ISupplierRepository> 
 		super(repository);
 	}
 
-	public Supplier findById(int id) throws FormatException {
+	public Supplier findById(long id) throws FormatException {
 		if(id > 0) {
 			Supplier supplier = repository.findById(id);
 			return supplier == null ? null : supplier;	
@@ -32,7 +32,7 @@ public class SupplierService extends BaseService<Supplier, ISupplierRepository> 
 		}
 	}
 	
-	public void remove(int id) throws FormatException {
+	public void remove(long id) throws FormatException {
 		Supplier supplier = repository.findById(id);
 		if(supplier != null) {
 			repository.remove(supplier);

@@ -1,7 +1,6 @@
-package vsb.vea.models;
+package vsb.vea.web.models;
 
-public abstract class BaseEntity<Tkey> {
-	
+public abstract class BaseDataTransferObject<Tkey> {
 	protected Tkey id;
 
 	public Tkey getId() {

@@ -1,8 +1,33 @@
 package vsb.vea.web.models;
 
 public class SupplierInput {
-	public String name;
-	public String description;
-	public AddressInput address;
-	public String web;
+	private String name;
+	private String description;
+	private AddressInput address;
+	private String web;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public AddressInput getAddress() {
+		return address;
+	}
+	public void setAddress(AddressInput address) {
+		this.address = address;
+	}
+	public String getWeb() {
+		return web;
+	}
+	public void setWeb(String web) {
+		this.web = web;
+	}
 }

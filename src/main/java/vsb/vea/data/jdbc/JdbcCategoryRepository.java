@@ -14,9 +14,9 @@ public class JdbcCategoryRepository implements ICategoryRepository {
 	}
 
 	@Override
-	public void create(Category entity) {
+	public Category create(Category entity) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
@@ -32,13 +32,13 @@ public class JdbcCategoryRepository implements ICategoryRepository {
 	}
 
 	@Override
-	public int Count() {
+	public int count() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public Category findById(int id) {
+	public Category findById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

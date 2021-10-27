@@ -8,7 +8,7 @@ import vsb.vea.data.irepositories.IBaseRepository;
 import vsb.vea.models.BaseEntity;
 
 @Service
-public class BaseService<T extends BaseEntity, TRepository extends IBaseRepository<T>> {
+public class BaseService<T extends BaseEntity<Long>, TRepository extends IBaseRepository<T>> {
 	
 	protected TRepository repository;
 	
@@ -24,8 +24,8 @@ public class BaseService<T extends BaseEntity, TRepository extends IBaseReposito
 		return repository.get();
 	}
 	
-	public void create(T entity) {
-		repository.create(entity);
+	public T create(T entity) {
+		return repository.create(entity);
 	}
 	
 	public void edit(T entity) {

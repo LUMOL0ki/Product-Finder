@@ -1,7 +1,6 @@
 package vsb.vea.web.models;
 
-public class ProductBrief {
-	public int id;
+public class ProductBrief extends BaseDataTransferObject<Long> {
 	public String name;
 	public String ean;
 }

@@ -1,98 +1,43 @@
 package vsb.vea.web.mapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import vsb.vea.models.Product;
 import vsb.vea.web.models.*;
 
 public class ProductMapper {
+
+    @Autowired
+    private static ModelMapper modelMapper = new ModelMapper();
+    
 	public static Product fromProductBrief(ProductBrief productBrief) {
-		Product product = new Product(
-				productBrief.id,
-				productBrief.name,
-				productBrief.ean
-				);
-		return product;
+		return modelMapper.map(productBrief, Product.class);
 	}
-	
-	public static List<Product> fromProductBrief(List<ProductBrief> productBriefs) {
-		List<Product> products = new ArrayList<Product>();
-		for(ProductBrief productBrief : productBriefs) {
-			products.add(fromProductBrief(productBrief));
-		}
-		return products;
-	}
-	
+		
 	public static Product fromProductDetail(ProductDetail productDetail) {
-		Product product = new Product(
-				productDetail.id,
-				productDetail.name,
-				productDetail.description,
-				productDetail.ean,
-				SupplierMapper.fromSupplierBrief(productDetail.supplier),
-				CategoryMapper.fromCategoryBrief(productDetail.category)
-				);
-		return product;
+		return modelMapper.map(productDetail, Product.class);
 	}
 	
 	public static Product fromProductInput(ProductInput productInput) {
-		Product product = new Product(
-				productInput.name,
-				productInput.description,
-				productInput.ean,
-				productInput.supplierId,
-				productInput.categoryId
-				);
-		return product;
+		return modelMapper.map(productInput, Product.class);
 	}
 
-	public static Product fromProductInput(int id, ProductInput productInput) {
-		Product product = new Product(
-				id,
-				productInput.name,
-				productInput.description,
-				productInput.ean,
-				productInput.supplierId,
-				productInput.categoryId
-				);
+	public static Product fromProductInput(long id, ProductInput productInput) {
+		Product product = modelMapper.map(productInput, Product.class);
+		product.setId(id);
 		return product;
 	}
 	
 	public static ProductBrief toProductBrief(Product product) {
-		ProductBrief productBrief = new ProductBrief();
-		productBrief.id = product.getId();
-		productBrief.name = product.getName();
-		productBrief.ean = product.getEan();
-		return productBrief;
+		return modelMapper.map(product, ProductBrief.class);
 	}
 
-	public static List<ProductBrief> toProductBrief(List<Product> products) {
-		List<ProductBrief> productBriefs = new ArrayList<ProductBrief>();
-		for(Product product : products) {
-			productBriefs.add(toProductBrief(product));
-		}
-		return productBriefs;
-	}
-	
 	public static ProductDetail toProductDetail(Product product) {
-		ProductDetail productDetail = new ProductDetail();
-		productDetail.id = product.getId();
-		productDetail.name = product.getName();
-		productDetail.description = product.getDescription();
-		productDetail.ean = product.getEan();
-		productDetail.supplier = SupplierMapper.toSupplierBrief(product.getSupplier());
-		productDetail.category = CategoryMapper.toCategoryBrief(product.getCategory());
-		return productDetail;
+		return modelMapper.map(product, ProductDetail.class);
 	}
 	
 	public static ProductInput toProductInput(Product product) {
-		ProductInput productInput = new ProductInput();
-		productInput.name = product.getName();
-		productInput.description = product.getDescription();
-		productInput.ean = product.getEan();
-		productInput.supplierId = product.getSupplierId();
-		productInput.categoryId = product.getCategoryId();
-		return productInput;
+		return modelMapper.map(product, ProductInput.class);
 	}
 }

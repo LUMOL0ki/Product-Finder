@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import vsb.vea.data.irepositories.ICategoryRepository;
@@ -13,73 +14,84 @@ import vsb.vea.web.controllers.CategoryController;
 import vsb.vea.web.models.CategoryBrief;
 import vsb.vea.web.models.CategoryInput;
 
-public class CategoryControllerTest {
+public abstract class CategoryControllerTest {
 
-	private CategoryController categoryController;
-	private CategoryService categoryService;
-	private ICategoryRepository categoryRepository;
+	private CategoryController controller;
+	private CategoryService service;
+	private ICategoryRepository repository;
 	
 	public CategoryControllerTest(ICategoryRepository categoryRepository) {
-		this.categoryRepository = categoryRepository;
-		categoryService = new CategoryService(this.categoryRepository);
-		categoryController = new CategoryController(categoryService);
+		this.repository = categoryRepository;
+		service = new CategoryService(this.repository);
+		controller = new CategoryController(service);
 	}
 	
 	@Test
 	public void Get() {
-		assertTrue(categoryController.get().size() == categoryRepository.Count());
+		assertTrue(controller.get().size() == repository.count());
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0, 1, Integer.MAX_VALUE})
-	public void FindById(int id) {
+	public void FindById(long id) {
 		if(id <= 0) {
-			assertTrue(categoryController.findById(id) == null);
+			assertTrue(controller.findById(id) == null);
 		}
 		else {
-			for(CategoryBrief category : categoryController.get()) {
-				if(category.id == id) {
-					assertTrue(categoryController.findById(id) != null);					
+			for(CategoryBrief category : controller.get()) {
+				if(category.getId() == id) {
+					assertTrue(controller.findById(id) != null);					
 				}
 			}
 		}
 	}
 
+	@ParameterizedTest
+	@NullAndEmptySource
+	@ValueSource(strings = {"", " ", "A", "SSDDSFDDFDF"})
 	public void FindByName(String name) {
-		
+		if(name == null || name == "" || name == " ") {
+			assertTrue(controller.findByName(name) == null);
+		}
+		else if(name.length() > 0) {
+			assertTrue(controller.findByName(name).size() >= 0);
+		}
 	}
 	
 	@Test
-	public void Create() {
-		int before = categoryRepository.Count();
+	public void Create() throws FormatException {
+		int before = repository.count();
 		CategoryInput categoryInput = new CategoryInput();
 		categoryInput.name = "test";
 		categoryInput.description = null;
-		try {
-			categoryController.create(categoryInput);
-		} catch (FormatException e) {
-			e.printStackTrace();
-		}
-		int after = categoryRepository.Count();
+		controller.create(categoryInput);
+		int after = repository.count();
 		assertTrue(before < after);
 	}
 	
-	public void Edit() {
+	public void Edit() throws FormatException {
+		int before = repository.count();
+		CategoryInput categoryInput = new CategoryInput();
+		categoryInput.name = "test";
+		categoryInput.description = null;
+		controller.edit(1, categoryInput);
+		int after = repository.count();
 		
+		assertTrue(before == after && controller.findById(1).name == categoryInput.name);
 	}
 	
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0, 1, 4, Integer.MAX_VALUE})
-	public void Remove(int id) {
-		int before = categoryRepository.Count();
-		categoryController.remove(id);
-		int after = categoryRepository.Count();
+	public void Remove(long id) {
+		int before = repository.count();
+		controller.remove(id);
+		int after = repository.count();
 		if(id <= 0) {
 			assertTrue("not removed", before == after);
 		}
 		else {
-			for(CategoryBrief category : categoryController.get()) {
-				if(category.id == id) {
+			for(CategoryBrief category : controller.get()) {
+				if(category.getId() == id) {
 					assertTrue("not removed", before > after);					
 				}
 			}

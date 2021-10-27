@@ -1,6 +1,7 @@
 package vsb.vea.web.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.services.ProductService;
@@ -15,10 +16,10 @@ public class ProductController {
 	}
 	
 	public List<ProductBrief> get(){
-		return ProductMapper.toProductBrief(service.get());
+		return service.get().stream().map(ProductMapper::toProductBrief).collect(Collectors.toList());
 	}
 	
-	public ProductDetail findById(int id) {
+	public ProductDetail findById(long id) {
 		try {
 			return ProductMapper.toProductDetail(service.findById(id));
 		} catch (FormatException e) {
@@ -30,7 +31,7 @@ public class ProductController {
 	
 	public List<ProductBrief> findByName(String name){
 		try {
-			return ProductMapper.toProductBrief(service.findByName(name));
+			return service.findByName(name).stream().map(ProductMapper::toProductBrief).collect(Collectors.toList());
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,7 +51,7 @@ public class ProductController {
 	
 	public List<ProductBrief> findByNameOrEAN(String filter){
 		try {
-			return ProductMapper.toProductBrief(service.findByNameOrEAN(filter));
+			return service.findByNameOrEAN(filter).stream().map(ProductMapper::toProductBrief).collect(Collectors.toList());
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,11 +63,11 @@ public class ProductController {
 		service.create(ProductMapper.fromProductInput(product));
 	}
 	
-	public void edit(int id, ProductInput product) {
+	public void edit(long id, ProductInput product) {
 		service.edit(ProductMapper.fromProductInput(id, product));
 	}
 	
-	public void remove(int id) {
+	public void remove(long id) {
 		try {
 			service.remove(id);
 		} catch (FormatException e) {
@@ -75,7 +76,7 @@ public class ProductController {
 		}
 	}
 	
-	public void setProductAsReviewing(int id) {
+	public void setProductAsReviewing(long id) {
 		try {
 			service.setProductAsReviewing(id);
 		} catch (Exception e) {
@@ -84,7 +85,7 @@ public class ProductController {
 		}
 	}
 	
-	public void setProductAsApproved(int id) {
+	public void setProductAsApproved(long id) {
 		try {
 			service.setProductAsApproved(id);
 		} catch (Exception e) {
@@ -93,7 +94,7 @@ public class ProductController {
 		}
 	}
 	
-	public void setProductAsRejected(int id) {
+	public void setProductAsRejected(long id) {
 		try {
 			service.setProductAsRejected(id);
 		} catch (Exception e) {
