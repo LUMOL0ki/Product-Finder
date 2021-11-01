@@ -2,11 +2,15 @@ package vsb.vea.data.jdbc;
 
 import java.util.List;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import vsb.vea.data.irepositories.ICategoryRepository;
 import vsb.vea.models.Category;
 
 public class JdbcCategoryRepository implements ICategoryRepository {
 
+	JdbcTemplate template;
+	
 	@Override
 	public List<Category> get() {
 		// TODO Auto-generated method stub
