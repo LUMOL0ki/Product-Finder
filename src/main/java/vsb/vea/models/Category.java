@@ -3,8 +3,10 @@ package vsb.vea.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 
+@Entity
 public class Category extends BaseEntity<Long> {
 	@NotEmpty(message = "name cannot be empty.")
 	private String name;

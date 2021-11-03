@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //@EnableWebMvc
 @Configuration
 public class ProductFinderConfiguration implements WebMvcConfigurer{
+
 	@Bean
 	public ModelMapper modelMapper() {
 	    return new ModelMapper();
