@@ -2,8 +2,10 @@ package vsb.vea.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(scanBasePackages = {"vsb.vea.converters", "vsb.vea.data.mock", "vsb.vea.services", "vsb.vea.controllers", "vsb.vea.models"})
+@SpringBootApplication
+@ComponentScan("vsb.vea")
 public class ProductFinderApplication {
 
 	public static void main(String[] args) {

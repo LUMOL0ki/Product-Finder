@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<header th:fragment="header" class="top-row">
+		<a th:href="@{/}" class="logo"></a>
+		<div class="spring"></div>
+		<button type="button" class="account-control smooth-transition">Sign in</button>
+	</header>
+		
+	<footer th:fragment="footer" class="footer">
+		<span>© 2021, Lukáš Moravec, All rights reserved.</span>
+	</footer>
+</body>
+</html>

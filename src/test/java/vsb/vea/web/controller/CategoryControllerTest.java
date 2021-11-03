@@ -11,6 +11,7 @@ import vsb.vea.data.irepositories.ICategoryRepository;
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.services.CategoryService;
 import vsb.vea.web.controllers.CategoryController;
+import vsb.vea.web.mapper.CategoryMapper;
 import vsb.vea.web.models.CategoryBrief;
 import vsb.vea.web.models.CategoryInput;
 
@@ -28,7 +29,7 @@ public abstract class CategoryControllerTest {
 	
 	@Test
 	public void Get() {
-		assertTrue(controller.get().size() == repository.count());
+		assertTrue(controller.get().getBody().size() == repository.count());
 	}
 
 	@ParameterizedTest
@@ -38,9 +39,9 @@ public abstract class CategoryControllerTest {
 			assertTrue(controller.findById(id) == null);
 		}
 		else {
-			for(CategoryBrief category : controller.get()) {
+			for(CategoryBrief category : controller.get().getBody()) {
 				if(category.getId() == id) {
-					assertTrue(controller.findById(id) != null);					
+					assertTrue(repository.exists(CategoryMapper.fromCategoryBrief(category)) && controller.findById(id) != null);					
 				}
 			}
 		}
@@ -54,7 +55,7 @@ public abstract class CategoryControllerTest {
 			assertTrue(controller.findByName(name) == null);
 		}
 		else if(name.length() > 0) {
-			assertTrue(controller.findByName(name).size() >= 0);
+			assertTrue(controller.findByName(name).getBody().size() >= 0);
 		}
 	}
 	
@@ -77,7 +78,7 @@ public abstract class CategoryControllerTest {
 		controller.edit(1, categoryInput);
 		int after = repository.count();
 		
-		assertTrue(before == after && controller.findById(1).name == categoryInput.name);
+		assertTrue(before == after && controller.findById(1).getBody().name == categoryInput.name);
 	}
 	
 	@ParameterizedTest
@@ -90,7 +91,7 @@ public abstract class CategoryControllerTest {
 			assertTrue("not removed", before == after);
 		}
 		else {
-			for(CategoryBrief category : controller.get()) {
+			for(CategoryBrief category : controller.get().getBody()) {
 				if(category.getId() == id) {
 					assertTrue("not removed", before > after);					
 				}

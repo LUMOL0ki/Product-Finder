@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
 import vsb.vea.data.irepositories.ISupplierRepository;
+import vsb.vea.helpers.StringHelper;
 import vsb.vea.models.Supplier;
 
 @Repository
@@ -24,7 +25,7 @@ public class MockSupplierRepository extends MockBaseRepository<Supplier> impleme
 	
 	@Override
 	public List<Supplier> findByName(String name) {
-		return entities.stream().filter(s -> s.getName().contains(name)).collect(Collectors.toList());
+		return entities.stream().filter(s -> StringHelper.containsCaseInsensitive(s.getName(), name)).collect(Collectors.toList());
 	}
 
 }

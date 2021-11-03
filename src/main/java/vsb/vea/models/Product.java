@@ -13,7 +13,12 @@ public class Product extends Item{
 		super(id, name);
 		// TODO Auto-generated constructor stub
 	}
-		
+
+	public Product(String name, String ean) {
+		super(name, ean);
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Product(long id, String name, String ean) {
 		super(id, name, ean);
 		// TODO Auto-generated constructor stub

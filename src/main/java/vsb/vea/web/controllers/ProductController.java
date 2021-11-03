@@ -3,12 +3,19 @@ package vsb.vea.web.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.services.ProductService;
 import vsb.vea.web.mapper.ProductMapper;
 import vsb.vea.web.models.*;
 
+@RestController
+@RequestMapping("/products")
 public class ProductController {
+	@Autowired
 	private ProductService service;
 	
 	public ProductController(ProductService service) {

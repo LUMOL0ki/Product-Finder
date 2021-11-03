@@ -22,6 +22,12 @@ public class Item extends BaseEntity<Long> {
 		this.id = id;
 		this.name = name;
 	}
+	
+	public Item(String name, String ean) {
+		super();
+		this.name = name;
+		this.ean = ean;
+	}
 		
 	public Item(Long id, String name, String ean) {
 		super();

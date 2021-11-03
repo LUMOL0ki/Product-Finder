@@ -59,4 +59,8 @@ public abstract class MockBaseRepository<T extends BaseEntity<Long>> implements 
 	public int count() {
 		return entities.size();
 	}
+	
+	public boolean exists(T entity) {
+		return entities.stream().anyMatch(c -> c.getId().equals(entity.getId()));
+	}
 }

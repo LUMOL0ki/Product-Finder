@@ -2,6 +2,7 @@ package vsb.vea.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import vsb.vea.data.irepositories.IProductRepository;
@@ -13,6 +14,7 @@ import vsb.vea.models.StatusType;
 @Service
 public class ProductService extends BaseService<Product, IProductRepository> {
 
+	@Autowired
 	public ProductService(IProductRepository repository) {
 		super(repository);
 	}
@@ -63,7 +65,7 @@ public class ProductService extends BaseService<Product, IProductRepository> {
 
 	public List<Product> findByNameOrEAN(String filter) throws FormatException{
 		if(!StringHelper.isNullOrEmpty(filter)) {
-			return repository.findByName(filter);	
+			return repository.findByNameOrEAN(filter);	
 		}
 		else {
 			throw new FormatException("Product name is in invalid format.");

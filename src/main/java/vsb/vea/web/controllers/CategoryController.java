@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.models.Category;
@@ -23,78 +24,83 @@ import vsb.vea.web.models.CategoryBrief;
 import vsb.vea.web.models.CategoryDetail;
 import vsb.vea.web.models.CategoryInput;
 
-@Controller
+@RestController
+@RequestMapping("/categories")
 public class CategoryController {
 	
 	@Autowired
-	private CategoryService service;
-    
-	public CategoryController() {
-		
-	}
-	
+	private final CategoryService service;
+    	
 	public CategoryController(CategoryService service) {
 		this.service = service;
 	}
 	
-	@GetMapping("/")	
+	@GetMapping	
     @ResponseBody
-	public List<CategoryBrief> get(){
-		return service.get().stream().map(CategoryMapper::toCategoryBrief).collect(Collectors.toList());
+	public ResponseEntity<List<CategoryBrief>> get(){
+		return ResponseEntity.ok(service.get().stream().map(CategoryMapper::toCategoryBrief).collect(Collectors.toList()));
 	}
 
-	@RequestMapping("/find/{id}")
-	public CategoryDetail findById(@PathVariable long id) {
+	@GetMapping("/test")
+	public String test() {
+		return "success";
+	}
+	
+	@GetMapping("/find/{id}")
+	public ResponseEntity<CategoryDetail> findById(@PathVariable long id) {
 		Category category = null;
 		try {
 			category = service.findById(id);
-			return category != null ? CategoryMapper.toCategoryDetail(category) : null;
+			return category != null ? ResponseEntity.ok(CategoryMapper.toCategoryDetail(category)) : new ResponseEntity<CategoryDetail>(HttpStatus.NOT_FOUND);
 		} catch (FormatException e) {
-			e.printStackTrace(); //TODO: exception handler.
-			return null;
+			e.printStackTrace();
+			return new ResponseEntity<CategoryDetail>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
-	@RequestMapping("/find/{name}")
-	public List<CategoryBrief> findByName(@PathVariable String name){
+	@GetMapping("/find/{name}")
+	public  ResponseEntity<List<CategoryBrief>> findByName(@PathVariable String name){
 		try {
-			return service.findByName(name).stream().map(CategoryMapper::toCategoryBrief).collect(Collectors.toList());
+			return ResponseEntity.ok(service.findByName(name).stream().map(CategoryMapper::toCategoryBrief).collect(Collectors.toList()));
 		} catch (FormatException e) {
 			e.printStackTrace(); //TODO: exception handler.
-			return null;
+			return new ResponseEntity<List<CategoryBrief>>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
 	@PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-	public CategoryDetail create(CategoryInput category) {
+	public ResponseEntity<CategoryDetail> create(CategoryInput category) {
 		if(category != null) {
-			return CategoryMapper.toCategoryDetail(service.create(CategoryMapper.fromCategoryInput(category)));
+			return ResponseEntity.ok(CategoryMapper.toCategoryDetail(service.create(CategoryMapper.fromCategoryInput(category))));
 		}
 		else {
-			return null;
+			return new ResponseEntity<CategoryDetail>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
 	@PutMapping("/edit/{id}")
     @ResponseStatus(HttpStatus.OK)
-	public void edit(@PathVariable long id, CategoryInput category) {
+	public ResponseEntity<String> edit(@PathVariable long id, CategoryInput category) {
 		service.edit(null);
 		if(category != null) {
 			service.edit(CategoryMapper.fromCategoryInput(id, category));
+			return ResponseEntity.ok("Successfully edited");
 		}
 		else {
-			
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@DeleteMapping("/remove/{id}")
-	public void remove(@PathVariable long id) {
+	public ResponseEntity<String> remove(@PathVariable long id) {
 		try {
 			service.remove(id);
+			return ResponseEntity.ok("Successfully removed");
 		} catch (FormatException e) {
-			e.printStackTrace(); // TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
 		}
 	}
 }

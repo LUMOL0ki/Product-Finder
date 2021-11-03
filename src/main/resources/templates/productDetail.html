@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="/css/app.css" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/images/barcode.svg"/>
+     
+	<title>Product finder</title>
+</head>
+<body>
+	<div class="index-layout">
+		<div th:replace="fragments/common :: header"></div>
+		<div class="content">
+		<button class="transparent-btn left smooth-transition" onclick='javascript:window.history.back()'>
+			<span class="btn-content bi bi-chevron-left"></span>
+		</button>
+		</div>
+		<div th:replace="fragments/common :: footer"></div>
+	</div>
+</body>
+</html>

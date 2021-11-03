@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="/css/app.css" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/images/barcode.svg"/>
+     
+	<title>Product finder</title>
+</head>
+<body>
+	<div class="index-layout">
+		<div th:replace="fragments/common :: header"></div>
+		<div class="index-container">
+			<form th:action="@{/productList}" action="productList" method="get">
+				<label class="search-control smooth-transition">
+					<span class="search-control-icon bi bi-search"></span>
+					<input class="search-control-input" type="search" placeholder="Find by EAN or product name" title="product search input" th:name="filter"/>
+				</label>
+			</form>
+			<!-- <button type="button"></button> -->
+		</div>
+		<div class="content">
+		<h2>Something about this product.</h2>
+		</div>
+		<div th:replace="fragments/common :: footer"></div>
+	</div>
+</body>
+</html>

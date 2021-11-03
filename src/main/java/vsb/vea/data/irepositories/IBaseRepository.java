@@ -14,4 +14,5 @@ public interface IBaseRepository<T extends BaseEntity<Long>> {
 	void edit(T entity);
 	void remove(T entity);
 	int count();
+	boolean exists(T entity);
 }

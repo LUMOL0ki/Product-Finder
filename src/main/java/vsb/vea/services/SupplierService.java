@@ -2,13 +2,18 @@ package vsb.vea.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import vsb.vea.data.irepositories.ISupplierRepository;
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.helpers.StringHelper;
 import vsb.vea.models.Supplier;
 
+@Service
 public class SupplierService extends BaseService<Supplier, ISupplierRepository> {
 
+	@Autowired
 	public SupplierService(ISupplierRepository repository) {
 		super(repository);
 	}

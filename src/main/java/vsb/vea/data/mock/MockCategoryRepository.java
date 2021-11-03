@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
 import vsb.vea.data.irepositories.ICategoryRepository;
+import vsb.vea.helpers.StringHelper;
 import vsb.vea.models.Category;
 
 @Repository
@@ -15,11 +16,6 @@ public class MockCategoryRepository extends MockBaseRepository<Category> impleme
 	
 	public MockCategoryRepository() {
 		super();
-		this.create(new Category("A"));
-		this.create(new Category("B"));
-		this.create(new Category("C"));
-		this.create(new Category("D"));
-		this.create(new Category("E"));
 	}
 
 	@PostConstruct
@@ -33,7 +29,7 @@ public class MockCategoryRepository extends MockBaseRepository<Category> impleme
 
 	@Override
 	public List<Category> findByName(String name) {
-		return entities.stream().filter(c -> c.getName().contains(name)).collect(Collectors.toList());
+		return entities.stream().filter(c -> StringHelper.containsCaseInsensitive(c.getName(), name)).collect(Collectors.toList());
 	}
 
 }

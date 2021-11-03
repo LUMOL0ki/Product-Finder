@@ -3,7 +3,9 @@ package vsb.vea.web.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.services.SupplierService;
@@ -12,8 +14,10 @@ import vsb.vea.web.models.SupplierBrief;
 import vsb.vea.web.models.SupplierDetail;
 import vsb.vea.web.models.SupplierInput;
 
-@Service
+@RestController
+@RequestMapping("/services")
 public class SupplierController {
+	@Autowired
 	private SupplierService service;
 	
 	public SupplierController(SupplierService service) {
