@@ -25,7 +25,7 @@ import vsb.vea.web.models.CategoryDetail;
 import vsb.vea.web.models.CategoryInput;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
 	
 	@Autowired

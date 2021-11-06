@@ -1,7 +1,22 @@
 package vsb.vea.web.models;
 
 public class CategoryBrief extends BaseDataTransferObject<Long> {
-	public String name;
+	private String name;
+		
+	public CategoryBrief() {
+		super();
+	}
+
+	public CategoryBrief(String name) {
+		super();
+		this.name = name;
+	}
+
+	public CategoryBrief(long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;

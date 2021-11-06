@@ -39,7 +39,12 @@ public class Product extends Item{
 		super(name, description, ean, supplierId, categoryId);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	public Product(String name, String description, String ean, Supplier supplier, Category category) {
+		super(name, description, ean, supplier, category);
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Product(long id, String name, String description, String ean, Supplier supplier, Category category) {
 		super(id, name, description, ean, supplier, category);
 		// TODO Auto-generated constructor stub

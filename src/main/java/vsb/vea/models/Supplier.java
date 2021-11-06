@@ -13,9 +13,14 @@ public class Supplier extends BaseEntity<Long> {
 	private Date created;
 	
 	public Supplier() {
-		
+		created = new Date();
 	}
 	
+	public Supplier(String name) {
+		super();
+		this.name = name;
+	}
+
 	public Supplier(long id, String name) {
 		super();
 		this.id = id;

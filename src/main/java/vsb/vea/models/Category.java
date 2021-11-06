@@ -15,7 +15,7 @@ public class Category extends BaseEntity<Long> {
 	private Date created;
 	
 	public Category() {
-		
+		created = new Date();
 	}
 	
 	public Category(@NotEmpty(message = "name cannot be empty.") String name) {

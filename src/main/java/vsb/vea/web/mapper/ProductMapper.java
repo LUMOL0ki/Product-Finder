@@ -34,7 +34,10 @@ public class ProductMapper {
 	}
 
 	public static ProductDetail toProductDetail(Product product) {
-		return modelMapper.map(product, ProductDetail.class);
+		ProductDetail productDetail = modelMapper.map(product, ProductDetail.class);
+		productDetail.setSupplier(modelMapper.map(product.getSupplier(), SupplierBrief.class));
+		productDetail.setCategory(modelMapper.map(product.getCategory(), CategoryBrief.class));
+		return productDetail;
 	}
 	
 	public static ProductInput toProductInput(Product product) {

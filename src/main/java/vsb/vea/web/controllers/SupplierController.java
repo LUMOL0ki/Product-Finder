@@ -15,7 +15,7 @@ import vsb.vea.web.models.SupplierDetail;
 import vsb.vea.web.models.SupplierInput;
 
 @RestController
-@RequestMapping("/services")
+@RequestMapping("/api/suppliers")
 public class SupplierController {
 	@Autowired
 	private SupplierService service;

@@ -14,16 +14,36 @@
 	<div class="index-layout">
 		<div th:replace="fragments/common :: header"></div>
 		<div class="index-container">
-			<form th:action="@{/productList}" action="productList" method="get">
-				<label class="search-control smooth-transition">
-					<span class="search-control-icon bi bi-search"></span>
-					<input class="search-control-input" type="search" placeholder="Find by EAN or product name" title="product search input" th:name="filter"/>
-				</label>
-			</form>
-			<!-- <button type="button"></button> -->
+			<div th:replace="fragments/common :: product-search"></div>
 		</div>
 		<div class="content">
-		<h2>Something about this product.</h2>
+		
+		<h2>What is an EAN?</h2>
+		<p>
+			EAN, or EAN13, stands for International Article Number (originally European Article Number). 
+			It is an extension of the UPC codes and you'll find them as barcodes on most everyday products. 
+			Sometimes the barcode is also called GTIN or GTIN13 (Global Trade Identifier).
+		</p>
+		
+		<h2>Which information is included in an EAN?</h2>
+		<p>
+			The EAN includes the country of origin, the manufacturer and a product number. 
+			In addition to that it includes a checksum.
+			When you only look at the barcode, you can't easily see which product it belongs to. 
+			Thus, this website provides a reverse EAN lookup, that tells you the product the EAN code belongs to.
+		</p>
+		
+		<h2>Can I download the full EAN database?</h2>
+		<p>
+			Unfortunately we can't make available the full database. 
+			Please use the search function on the website or get an account to make more searches. 
+			Please refrain from spidering the website. Access will be blocked completely for excessive usage.
+		</p>
+		
+		<h2>How can I submit EAN codes?</h2>
+		<p>
+			All registered users may submit lists with barcodes that are missing in our database for free as Excel sheet or CVS file.
+		</p>
 		</div>
 		<div th:replace="fragments/common :: footer"></div>
 	</div>

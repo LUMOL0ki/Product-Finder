@@ -4,6 +4,9 @@ import vsb.vea.models.Category;
 import vsb.vea.web.models.CategoryBrief;
 import vsb.vea.web.models.CategoryDetail;
 import vsb.vea.web.models.CategoryInput;
+import vsb.vea.web.models.ProductBrief;
+
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +42,12 @@ public class CategoryMapper {
 	}
 	
 	public static CategoryDetail toCategoryDetail(Category category) {
-		return modelMapper.map(category, CategoryDetail.class);
+		CategoryDetail categoryDetail = modelMapper.map(category, CategoryDetail.class);
+		modelMapper.map(category.getProducts(), categoryDetail.getProducts());
+		categoryDetail.setProducts(category.getProducts().stream()
+				  .map(product -> modelMapper.map(product, ProductBrief.class))
+				  .collect(Collectors.toList()));
+		return categoryDetail;
 	}
 	
 	public static CategoryInput toCategoryInput(Category category) {

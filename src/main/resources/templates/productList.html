@@ -14,18 +14,15 @@
 	<div class="index-layout">
 		<div th:replace="fragments/common :: header"></div>
 		<div class="search-container">
-			<form th:action="@{/productList}" action="productList" method="get">
-				<label class="search-control smooth-transition">
-					<span class="search-control-icon bi bi-search"></span>
-					<input class="search-control-input" type="search" placeholder="Find by EAN or product name" title="product search input" th:name="filter"/>
-				</label>
-			</form>
+			<div th:replace="fragments/common :: product-search"></div>
 			<!-- <button type="button"></button> -->
 		</div>
+		<div class="overflow">
 		<div class="content">
+		
 			<div th:if="${products.size() == 0}">Product not found.</div>
-			<a class="product-item smooth-transition" th:each="product : ${products}" th:href="@{/productDetail/{id}(id=${product.id})}">
-				<span class="product-image"></span>
+			<a class="product-item smooth-transition" th:each="product : ${products}" th:href="@{/product/{id}(id=${product.id})}">
+				<!-- <span class="product-image"></span> -->
 				<span class="product-info">
 					<span class="product-name" th:text="${product.name}"></span>
 					<span class="product-ean" th:text="${product.ean}"></span>
@@ -33,6 +30,7 @@
 			</a>
 		</div>
 		<div th:replace="fragments/common :: footer"></div>
+		</div>
 	</div>
 </body>
 </html>

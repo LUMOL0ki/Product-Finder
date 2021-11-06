@@ -13,7 +13,7 @@ import vsb.vea.web.mapper.ProductMapper;
 import vsb.vea.web.models.*;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductController {
 	@Autowired
 	private ProductService service;

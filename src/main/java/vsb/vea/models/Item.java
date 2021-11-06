@@ -14,7 +14,7 @@ public class Item extends BaseEntity<Long> {
 	protected Date created;
 		
 	public Item() {
-		super();
+		created = new Date();
 	}
 
 	public Item(Long id, String name) {
@@ -35,7 +35,16 @@ public class Item extends BaseEntity<Long> {
 		this.name = name;
 		this.ean = ean;
 	}
-
+	
+	public Item(String name, String description, String ean, long supplierId, long categoryId) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.ean = ean;
+		this.supplierId = supplierId;
+		this.categoryId = categoryId;
+	}
+	
 	public Item(Long id, String name, String description, String ean, long supplierId, long categoryId,
 			StatusType status) {
 		super();
@@ -47,16 +56,16 @@ public class Item extends BaseEntity<Long> {
 		this.categoryId = categoryId;
 		this.status = status;
 	}
-		
-	public Item(String name, String description, String ean, long supplierId, long categoryId) {
+
+	public Item(String name, String description, String ean, Supplier supplier, Category category) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.ean = ean;
-		this.supplierId = supplierId;
-		this.categoryId = categoryId;
+		this.supplier = supplier;
+		this.category = category;
 	}
-
+	
 	public Item(Long id, String name, String description, String ean, Supplier supplier, Category category) {
 		super();
 		this.id = id;

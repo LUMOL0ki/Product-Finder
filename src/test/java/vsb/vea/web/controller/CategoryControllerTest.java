@@ -78,7 +78,7 @@ public abstract class CategoryControllerTest {
 		controller.edit(1, categoryInput);
 		int after = repository.count();
 		
-		assertTrue(before == after && controller.findById(1).getBody().name == categoryInput.name);
+		assertTrue(before == after && controller.findById(1).getBody().getName() == categoryInput.name);
 	}
 	
 	@ParameterizedTest

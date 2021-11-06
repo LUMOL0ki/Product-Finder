@@ -77,7 +77,7 @@ public abstract class ProductControllerTest {
 		controller.edit(1, productInput);
 		int after = repository.count();
 		
-		assertTrue(before == after && controller.findById(1).name == productInput.name);
+		assertTrue(before == after && controller.findById(1).getName() == productInput.name);
 	}
 	
 	@ParameterizedTest

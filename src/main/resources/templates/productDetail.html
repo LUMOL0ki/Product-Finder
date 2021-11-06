@@ -13,10 +13,31 @@
 <body>
 	<div class="index-layout">
 		<div th:replace="fragments/common :: header"></div>
-		<div class="content">
-		<button class="transparent-btn left smooth-transition" onclick='javascript:window.history.back()'>
+		<button class="transparent-btn left back-btn smooth-transition" onclick='javascript:window.history.back()'>
 			<span class="btn-content bi bi-chevron-left"></span>
 		</button>
+		<div class="content list">
+			
+			<div class="invisible-container">
+			<h1 th:text="${product.name}"></h1>
+			<span th:text="${product.description}"></span>
+			<div class="row">
+				<span>EAN: </span><span th:text="${product.ean}"></span>
+			</div>			
+			
+			<div th:if="${product.category != null}">
+				<div class="row">
+					<span>Category: </span><span th:text="${product.category.name}"></span>
+				</div>
+			</div>
+			
+			<div th:if="${product.supplier != null}">
+				<h2>Supplier</h2>
+				<div class="row">
+					<span>Name: </span><a th:text="${product.supplier.name}" th:href="@{/supplier/{id}(id=${product.supplier.id})}"></a>
+				</div>
+			</div>
+			</div>
 		</div>
 		<div th:replace="fragments/common :: footer"></div>
 	</div>

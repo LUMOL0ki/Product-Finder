@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import vsb.vea.data.irepositories.IProductRepository;
 import vsb.vea.helpers.StringHelper;
+import vsb.vea.models.Category;
 import vsb.vea.models.Product;
+import vsb.vea.models.Supplier;
 
 @Repository
 public class MockProductRepository extends MockBaseRepository<Product> implements IProductRepository {
@@ -19,22 +21,22 @@ public class MockProductRepository extends MockBaseRepository<Product> implement
 	
 	@PostConstruct
 	protected void initialize() {
-		this.create(new Product("Item A", "123456"));
-		this.create(new Product("Item B", "123457"));
-		this.create(new Product("Item C", "123458"));
-		this.create(new Product("Item D", "123459"));
-		this.create(new Product("Item A", "123456"));
-		this.create(new Product("Item B", "123457"));
-		this.create(new Product("Item C", "123458"));
-		this.create(new Product("Item D", "123459"));
-		this.create(new Product("Item A", "123456"));
-		this.create(new Product("Item B", "123457"));
-		this.create(new Product("Item C", "123458"));
-		this.create(new Product("Item D", "123459"));
-		this.create(new Product("Item A", "123456"));
-		this.create(new Product("Item B", "123457"));
-		this.create(new Product("Item C", "123458"));
-		this.create(new Product("Item D", "123459"));
+		this.create(new Product("Item A", "", "123456", new Supplier(1, "Kofola"), new Category(1, "A")));
+		this.create(new Product("Item B", "", "123457", 1, 1));
+		this.create(new Product("Item C", "", "123458", 1, 1));
+		this.create(new Product("Item D", "", "123459", 1, 1));
+		this.create(new Product("Item A", "", "123456", 1, 1));
+		this.create(new Product("Item B", "", "123457", 1, 1));
+		this.create(new Product("Item C", "", "123458", 1, 1));
+		this.create(new Product("Item D", "", "123459", 1, 1));
+		this.create(new Product("Item A", "", "123456", 1, 1));
+		this.create(new Product("Item B", "", "123457", 1, 1));
+		this.create(new Product("Item C", "", "123458", 1, 1));
+		this.create(new Product("Item D", "", "123459", 1, 1));
+		this.create(new Product("Item A", "", "123456", 1, 1));
+		this.create(new Product("Item B", "", "123457", 1, 1));
+		this.create(new Product("Item C", "", "123458", 1, 1));
+		this.create(new Product("Item D", "", "123459", 1, 1));
 	}
 	
 	@Override
