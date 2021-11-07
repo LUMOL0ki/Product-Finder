@@ -53,7 +53,6 @@ public class IndexController {
 	@GetMapping("/products/management")
 	public String productManagement(Model model) {
 		model.addAttribute("products", productService.get());
-		model.addAttribute("isOpen", false);
 		return "productManagement";
 	}
 	

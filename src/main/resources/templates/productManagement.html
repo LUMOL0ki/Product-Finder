@@ -21,12 +21,9 @@
 					</div>
 					<div class="row no-gap flex-1">
 						<div th:replace="fragments/common :: sidebar(selected=0)"></div>
-						<div class="two-pane-view">
-							<div class="left-pane">
-								left pane
-							</div>
-							<div class="right-pane">
-								right pane
+						<div class="invisible-container list">
+							<div th:each="product : ${products}">
+								<span th:text="${product.name}"></span>
 							</div>
 						</div>
 					</div>

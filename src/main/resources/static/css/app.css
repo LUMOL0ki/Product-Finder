@@ -87,7 +87,13 @@ html, body {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
  	
+ 	display: flex;
  	background-color: var(--transparent-element-color);
+ 	color: var(--primary-text-color);
+ 	text-decoration: none;
+ 	text-align: center;
+ 	align-items: center;
+ 	justify-content: center;
  	border: none;
  	min-width: var(--account-button-size);
  	width: 100%;
@@ -120,12 +126,16 @@ html, body {
  }
  
  .sidebar-button {
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
  	background: var(--transparent-element-color);
  	width: 42px;
  	height: 42px;
  	margin: 8px;
  	border: none;
  	border-radius: var(--rounded-element);
+ 	z-index: 1000;
  }
  
  .sidebar-button:hover {
@@ -137,28 +147,60 @@ html, body {
  .sidebar-button:active {
  	background: var(--transparent-element-active-color);
  }
+  
+ .sidebar-button-input {
+ 	display: none;
+ }
  
- .sidebar {
+ .sidebar-container {
  	position: absolute;
  	top: 58px;
  	bottom: 0;
+ 	width: 0;
+ 	z-index: 999;
+ }
+ 
+ .sidebar-background {
+ 	position: absolute;
+ 	top: 0;
+ 	left: 0;
+ 	bottom: 0;
+ 	right: 0;
+ 	background: #0000009d;
+ 	display: none;
+ 	z-index: 997;
+ }
+ 
+ .sidebar {
+ 	position: relative;
  	background: var(--primary-bg-color);
  	display: flex;
  	flex-direction: column;
  	row-gap: 8px;
  	padding: 8px;
  	width: 256px;
- 	flex: 1;
+ 	height: 100%;
+  	transform: translateX(-100%);
+  	transition: all 200ms ease-out;
+  	z-index: 998;
  }
  
- .hidden {
- 	left: -272px;
+ .sidebar-button-input:checked ~ .sidebar-background {
+ 	display: block;
+ 	position: fixed;
+ }
+ 
+ .sidebar-button-input:checked ~ .sidebar {
+  	transform: translateX(0);
+  	transition: all 200ms ease-out;	
  }
  
  .sidebar-item {
  	position: relative;
  	display: flex;
- 	flex-direction: row;
+	flex-direction: row;
+	justify-content: flex-start;
+	column-gap: 8px;
  	text-decoration: none;
  	color: var(--primary-text-color);
  	
@@ -169,7 +211,7 @@ html, body {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
  	border-radius: var(--rounded-element);
- 	padding: 16px 8px;
+	padding: 12px 8px;
  }
  
 .sidebar-item:hover {
@@ -401,7 +443,7 @@ html, body {
 	background: var(--primary-bg-color);
 	padding: 16px;
 	margin: 4px 0;
-	border-radius: var(--rounded-element);
+	border-radius: var(--rounded-container);
 	color: var(--primary-text-color);
 	text-decoration: none;
 }
@@ -486,11 +528,20 @@ html, body {
 		display: none;
 	}
 	
+	.sidebar-container {
+		position: relative;
+		display: flex;
+		left: 0;
+		top: 0;
+		width: auto;
+	}
+	
 	.sidebar {
 		position: relative;
-		top: 0;
 		width: 52px;
-		flex: 0;
+		height: auto;
+		flex: 1;
+		transform: translateX(0);
 	}
 	
 	.sidebar-item {

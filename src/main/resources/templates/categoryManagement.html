@@ -12,9 +12,23 @@
 	</head>
 	<body>
 		<div class="index-layout">
-			<div th:replace="fragments/common :: header"></div>
-			<div class="content">
-	
+			
+			<div class="sidebar-view">								
+				<div class="column no-gap flex-1">
+					<div class="row no-gap primary-bg">
+						<div th:replace="fragments/common :: sidebar-button"></div>
+						<div th:replace="fragments/common :: header"></div>
+					</div>
+					<div class="row no-gap flex-1">
+						<div th:replace="fragments/common :: sidebar(selected=2)"></div>
+						<div class="invisible-container list">
+							<div th:each="category : ${categories}">
+								<span th:text="${category.name}"></span>
+							</div>
+						</div>
+					</div>
+					
+				</div>
 			</div>
 		</div>
 	</body>

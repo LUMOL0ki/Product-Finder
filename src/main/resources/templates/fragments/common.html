@@ -8,7 +8,7 @@
 	<header th:fragment="header" class="top-row">
 		<a th:href="@{/}" class="logo"></a>
 		<div class="spring"></div>
-		<button type="button" class="account-control smooth-transition">Sign in</button>
+		<a type="button" class="account-control smooth-transition" th:href="@{/products/management}">Sign in</a>
 	</header>
 		
 	<form th:fragment="product-search" th:action="@{/products}" action="products" method="get">
@@ -18,25 +18,28 @@
 		</label>
 	</form>
 	
-	<button th:fragment="sidebar-button" class="sidebar-button" th:onclick="${!isOpen}">
+	<label th:fragment="sidebar-button" class="sidebar-button" for="sidebar-button-input">
 		<span class="bi bi-list"></span>
-	</button>
+	</label>
 	
-	<div th:fragment="sidebar (selected)" class="sidebar smooth-transition" th:classappend="${isOpen} ? '' : 'hidden'">
-		<a class="sidebar-item smooth-transition" th:href="@{/products/management}" th:classappend="${selected == 0} ? 'active' : ''">
-			<span class="sidebar-item-icon bi bi-bag"></span>
-			<span class="sidebar-item-text">Products</span>
-		</a>
-		<a class="sidebar-item smooth-transition" th:href="@{/suppliers/management}" th:classappend="${selected == 1} ? 'active' : ''">
-			<span class="sidebar-item-icon bi bi-telephone"></span>
-			<span class="sidebar-item-text">Suppliers</span>
-		</a>
-		<a class="sidebar-item smooth-transition" th:href="@{/categories/management}" th:classappend="${selected == 2} ? 'active' : ''">
-			<span class="sidebar-item-icon bi bi-bookmark"></span>
-			<span class="sidebar-item-text">Categories</span>
-		</a>
+	<div th:fragment="sidebar (selected)" class="sidebar-container">
+		<input class="sidebar-button-input" id="sidebar-button-input" type="checkbox"/>
+		<label class="sidebar-background" for="sidebar-button-input"></label>
+		<nav class="sidebar smooth-transition">
+			<a class="sidebar-item smooth-transition" th:href="@{/products/management}" th:classappend="${selected == 0} ? 'active' : ''">
+				<span class="sidebar-item-icon bi bi-bag"></span>
+				<span class="sidebar-item-text">Products</span>
+			</a>
+			<a class="sidebar-item smooth-transition" th:href="@{/suppliers/management}" th:classappend="${selected == 1} ? 'active' : ''">
+				<span class="sidebar-item-icon bi bi-telephone"></span>
+				<span class="sidebar-item-text">Suppliers</span>
+			</a>
+			<a class="sidebar-item smooth-transition" th:href="@{/categories/management}" th:classappend="${selected == 2} ? 'active' : ''">
+				<span class="sidebar-item-icon bi bi-bookmark"></span>
+				<span class="sidebar-item-text">Categories</span>
+			</a>
+		</nav>
 	</div>
-	
 	<footer th:fragment="footer" class="footer">
 		<span>© 2021, Lukáš Moravec, All rights reserved.</span>
 	</footer>
