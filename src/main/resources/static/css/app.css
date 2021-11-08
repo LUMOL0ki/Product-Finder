@@ -49,6 +49,10 @@ html, body {
 	flex: 1;
 }
 
+.overflow-auto {
+	overflow: auto;
+}
+
 .smooth-transition {
 	transition: 250ms;
 }
@@ -61,7 +65,10 @@ html, body {
  	flex-direction: row;
 	height: 42px;
 	padding: 8px;
-	flex: 1;
+ }
+ 
+ .row .top-row {
+ 	flex: 1;
  }
  
  .top-row .logo {
@@ -122,6 +129,7 @@ html, body {
  .sidebar-view {
  	display: flex;
  	flex-direction: row;
+ 	height: 100%;
 	flex: 1;
  }
  
@@ -155,8 +163,8 @@ html, body {
  .sidebar-container {
  	position: absolute;
  	top: 58px;
- 	bottom: 0;
  	width: 0;
+	height: calc(100% - 74px);
  	z-index: 999;
  }
  
@@ -251,8 +259,6 @@ html, body {
  }
  
  .invisible-container {
- 	height: 100%;
- 	max-height: auto;
  	padding: 8px;
  }
  
@@ -340,9 +346,15 @@ html, body {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
 	background: var(--primary-element-color);
 	color: var(--secondary-text-color);
 	font-size: larger;
+	text-decoration: none;
 	border: none;
 	border-radius: var(--rounded-element);
 	padding: 8px 16px;
@@ -366,8 +378,14 @@ html, body {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
 	background: var(--secondary-element-color);
 	font-size: larger;
+	text-decoration: none;
 	border: none;
 	border-radius: var(--rounded-element);
 	padding: 16px;
@@ -390,8 +408,14 @@ html, body {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
 	background: var(--transparent-element-color);
 	font-size: larger;
+	text-decoration: none;
 	border: none;
 	border-radius: var(--rounded-element);
 	padding: 16px;	
@@ -415,6 +439,65 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	row-gap: 8px;
+}
+
+.list-item-container {
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+}
+
+.list-item-container .row {
+	display: flex;
+	align-items: stretch;
+	justify-content: center;
+}
+
+.list-item-container .list-item-management {
+	display: flex;
+	column-gap: 8px;
+	align-items: stretch;
+	justify-content: center;
+}
+
+.list-item {
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    
+	display: flex;
+	flex-direction: row;
+	column-gap: 8px;
+	background: var(--primary-bg-color);
+	padding: 16px;
+	border-radius: var(--rounded-element);
+	color: var(--primary-text-color);
+	text-decoration: none;
+}
+
+.list-item:hover {
+	background: var(--secondary-element-hover-color);	
+}
+
+.list-item:active {
+	background: var(--secondary-element-active-color);	
+}
+
+.list-item .list-item-info {
+	display: flex;
+	flex-direction: column;	
+	row-gap: 8px;
+}
+
+.list-item .list-item-info .list-item-main-text {
+	font-weight: bold;
+}
+
+.list-item .list-item-info .list-item-secondary-text {
+	font-size: small;
 }
 
 .left {
@@ -442,8 +525,7 @@ html, body {
 	column-gap: 8px;
 	background: var(--primary-bg-color);
 	padding: 16px;
-	margin: 4px 0;
-	border-radius: var(--rounded-container);
+	border-radius: var(--rounded-element);
 	color: var(--primary-text-color);
 	text-decoration: none;
 }
@@ -534,6 +616,7 @@ html, body {
 		left: 0;
 		top: 0;
 		width: auto;
+ 		height: auto;
 	}
 	
 	.sidebar {

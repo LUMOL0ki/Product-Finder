@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import vsb.vea.data.irepositories.ISupplierRepository;
@@ -13,6 +14,10 @@ import vsb.vea.models.Address;
 import vsb.vea.models.Supplier;
 
 @Repository
+@ConditionalOnProperty(
+		  value="dataAccessSource", 
+		  havingValue = "mock", 
+		  matchIfMissing = false)
 public class MockSupplierRepository extends MockBaseRepository<Supplier> implements ISupplierRepository {
 		
 	public MockSupplierRepository() {

@@ -21,9 +21,17 @@
 					</div>
 					<div class="row no-gap flex-1">
 						<div th:replace="fragments/common :: sidebar(selected=1)"></div>
-						<div class="invisible-container list">
-							<div th:each="supplier : ${suppliers}">
-								<span th:text="${supplier.name}"></span>
+												
+						<div class="invisible-container list flex-1">
+							<a class="primary-btn left smooth-transition" th:href="@{/management/supplier}">Create</a>
+							<div class="list-item-container" th:each="supplier : ${suppliers}">
+								<div class="row">
+									<div th:replace="fragments/common :: list-item (object=${supplier}, redirect=@{/management/supplier/{id}(id=${supplier.id})})")></div>
+									<div class="list-item-management smooth-transition">
+										<a class="primary-btn list-item-management-edit" th:href="@{/management/supplier/edit/{id}(id=${supplier.id})}"><span class="bi bi-pencil-square"></span></a>
+										<a class="primary-btn list-item-management-remove"><span class="bi bi-trash"></span></a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

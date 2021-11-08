@@ -12,22 +12,29 @@
 	</head>
 	<body>
 		<div class="index-layout">
-			
-			<div class="sidebar-view">								
-				<div class="column no-gap flex-1">
-					<div class="row no-gap primary-bg">
-						<div th:replace="fragments/common :: sidebar-button"></div>
-						<div th:replace="fragments/common :: header"></div>
-					</div>
-					<div class="row no-gap flex-1">
-						<div th:replace="fragments/common :: sidebar(selected=0)"></div>
-						<div class="invisible-container list">
-							<div th:each="product : ${products}">
-								<span th:text="${product.name}"></span>
+			<div class="sidebar-view column no-gap">								
+				<div class="row no-gap primary-bg">
+					<div th:replace="fragments/common :: sidebar-button"></div>
+					<div th:replace="fragments/common :: header"></div>
+				</div>
+
+				<div class="row no-gap overflow-auto flex-1">
+					<div th:replace="fragments/common :: sidebar(selected=0)"></div>
+												
+					<div class="invisible-container column flex-1">
+						<a class="primary-btn left smooth-transition" th:href="@{/management/product}">Create</a>
+						<div class="list overflow-auto">
+							<div class="list-item-container" th:each="product : ${products}">
+								<div class="row">
+									<div th:replace="fragments/common :: product-item (object=${product}, redirect=@{/management/product/{id}(id=${product.id})})"></div>
+									<div class="list-item-management smooth-transition">
+										<a class="primary-btn list-item-management-edit" th:href="@{/management/product/edit/{id}(id=${product.id})}"><span class="bi bi-pencil-square"></span></a>
+										<a class="primary-btn list-item-management-remove"><span class="bi bi-trash"></span></a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>

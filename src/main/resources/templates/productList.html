@@ -18,7 +18,7 @@
 			<!-- <button type="button"></button> -->
 		</div>
 		<div class="overflow">
-		<div class="content">
+		<div class="content list">
 		
 			<div th:if="${products.size() == 0}">Product not found.</div>
 			<a class="product-item smooth-transition" th:each="product : ${products}" th:href="@{/product/{id}(id=${product.id})}">
