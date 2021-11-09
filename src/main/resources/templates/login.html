@@ -13,9 +13,17 @@
 <body>
 	<div class="index-layout">
 		<div th:replace="fragments/common :: header"></div>
-		<div th:replace="fragments/common :: back-button"></div>
-		<div class="content list">
-			<div th:replace="fragments/productComponents :: product-detail (product=${product})"></div>
+		<div class="content center">
+			<div class="container login-container">
+				<div th:if="${param.error}">
+        		    Invalid username and password.
+    		    </div>
+		        <form class="list" th:action="@{/login}" method="post">
+            		<input class="form-input" type="text" placeholder="Username" name="username"/>
+        		    <input class="form-input" type="password" placeholder="Password" name="password"/>
+    		        <button class="primary-btn smooth-transition" type="submit">Sign In</button>
+		        </form>
+			</div>
 		</div>
 		<div th:replace="fragments/common :: footer"></div>
 	</div>

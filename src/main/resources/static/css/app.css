@@ -63,6 +63,7 @@ html, body {
     align-items: center;
     justify-content: center;
  	flex-direction: row;
+ 	column-gap: 8px;
 	height: 42px;
 	padding: 8px;
  }
@@ -81,7 +82,7 @@ html, body {
  }
  
 .top-row .spring {
-	width: 100%;
+	flex: 1;
  }
   
  .top-row .account-control {
@@ -99,12 +100,13 @@ html, body {
  	color: var(--primary-text-color);
  	text-decoration: none;
  	text-align: center;
+ 	font-size: medium;
+ 	padding: 0 16px;
  	align-items: center;
  	justify-content: center;
  	border: none;
  	min-width: var(--account-button-size);
  	width: 100%;
- 	max-width: calc(var(--account-button-size)*2);
  	white-space: nowrap;
  	height: var(--account-button-size);
  	border-radius: calc(var(--account-button-size)/2);
@@ -118,6 +120,20 @@ html, body {
  .top-row .account-control:active {
 	background-color: var(--transparent-element-active-color);
  }
+  
+  .form-input {
+  	background: var(--secondary-element-color);
+  	border: none;
+  	padding: 8px;
+  }
+    
+  .form-input:hover {
+  	background: var(--secondary-element-hover-color);
+  }
+  
+  .form-input:active {
+  	background: var(--secondary-element-active-color);
+  }
   
  .index-layout {
  	position: relative;
@@ -288,6 +304,14 @@ html, body {
  	align-items: center;
  	justify-content: center;
  	height: 100%;
+ }
+ 
+ .login-container {
+ 	width: 280px;
+    justify-content: center;
+    display: flex;
+    row-gap: 8px;
+    flex-direction: column;
  }
  
  .search-container {
@@ -497,7 +521,7 @@ html, body {
 }
 
 .list-item .list-item-info .list-item-secondary-text {
-	font-size: small;
+	font-size: x-small;
 }
 
 .left {
@@ -575,6 +599,11 @@ html, body {
 	column-gap: 0;
 }
 
+.center {
+	align-items: center;
+	justify-content: center;
+}
+	
 .footer {
 	display: flex;
 	background: var(--primary-bg-color);

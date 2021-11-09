@@ -3,12 +3,19 @@ package vsb.vea.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+@Entity
 public class Supplier extends BaseEntity<Long> {
+	@NotEmpty(message = "name cannot be empty.")
 	private String name;
 	private String description;
 	private long addressId;
 	private Address address;
 	private String web;
+	@OneToMany(mappedBy = "supplier")
 	private List<Product> products;
 	private Date created;
 	

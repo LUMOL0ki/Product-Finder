@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -11,6 +12,7 @@ public class Category extends BaseEntity<Long> {
 	@NotEmpty(message = "name cannot be empty.")
 	private String name;
 	private String description;
+	@OneToMany(mappedBy = "category")
 	private List<Product> products;
 	private Date created;
 	

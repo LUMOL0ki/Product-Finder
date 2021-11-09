@@ -8,7 +8,17 @@
 	<header th:fragment="header" class="top-row">
 		<a th:href="@{/}" class="logo"></a>
 		<div class="spring"></div>
-		<a type="button" class="account-control smooth-transition" th:href="@{/management/products}">Sign in</a>
+		<form sec:authorize="!isAuthenticated()" th:action="@{/management/products}" method="get">
+			<button type="submit" class="account-control smooth-transition">Sign in</button>
+		</form>
+		
+		<form sec:authorize="isAuthenticated()" th:action="@{/management/products}" method="get">
+			<button type="submit" class="account-control smooth-transition">Dashboard</button>
+		</form>
+		
+		<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+			<button type="submit" class="account-control smooth-transition">Sign out</button>
+		</form>
 	</header>
 		
 	<form th:fragment="product-search" th:action="@{/products}" action="products" method="get">
@@ -17,6 +27,10 @@
 			<input class="search-control-input" type="search" placeholder="Find by EAN or product name" title="product search input" th:name="filter"/>
 		</label>
 	</form>
+	
+	<button th:fragment="back-button" class="transparent-btn left back-btn smooth-transition" onclick='javascript:window.history.back()'>
+		<span class="btn-content bi bi-chevron-left"></span>
+	</button>
 	
 	<label th:fragment="sidebar-button" class="sidebar-button" for="sidebar-button-input">
 		<span class="bi bi-list"></span>
@@ -30,11 +44,11 @@
 				<span class="sidebar-item-icon bi bi-bag"></span>
 				<span class="sidebar-item-text">Products</span>
 			</a>
-			<a class="sidebar-item smooth-transition" th:href="@{/management/suppliers}" th:classappend="${selected == 1} ? 'active' : ''">
+			<a sec:authorize="hasRole('ROLE_REVIEWER')" class="sidebar-item smooth-transition" th:href="@{/management/suppliers}" th:classappend="${selected == 1} ? 'active' : ''">
 				<span class="sidebar-item-icon bi bi-telephone"></span>
 				<span class="sidebar-item-text">Suppliers</span>
 			</a>
-			<a class="sidebar-item smooth-transition" th:href="@{/management/categories}" th:classappend="${selected == 2} ? 'active' : ''">
+			<a sec:authorize="hasRole('ROLE_REVIEWER')" class="sidebar-item smooth-transition" th:href="@{/management/categories}" th:classappend="${selected == 2} ? 'active' : ''">
 				<span class="sidebar-item-icon bi bi-bookmark"></span>
 				<span class="sidebar-item-text">Categories</span>
 			</a>

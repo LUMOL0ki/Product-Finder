@@ -2,13 +2,22 @@ package vsb.vea.models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
 public class Item extends BaseEntity<Long> {
+	@NotEmpty(message = "name cannot be empty.")
 	protected String name;
 	protected String description;
 	protected String ean;
+	@Column(name = "supplier_id", insertable = false, updatable = false)
 	protected long supplierId;
+	@ManyToOne
 	protected Supplier supplier;
+	@Column(name = "category_id", insertable = false, updatable = false)
 	protected long categoryId;
+	@ManyToOne
 	protected Category category;
 	protected StatusType status;
 	protected Date created;
