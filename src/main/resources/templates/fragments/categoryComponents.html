@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-</body>
+	<head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div th:fragment="category-detail (category)">
+			<h1 th:text="${category.name}"></h1>
+			<div class="row">
+				<span th:text="${category.description}"></span>
+			</div>
+		</div>
+	
+		<form th:fragment="category-input (action)" class="list" action="${action}" method="post">
+			<input class="form-input" type="text" placeholder="name"/>
+			<textarea class="form-input" rows="6" placeholder="description"></textarea>
+			<button type="submit" class="primary-btn">Save</button>
+			<button type="button" class="secondary-btn" onclick='javascript:window.history.back()'>Cancel</button>
+		</form>
+	</body>
 </html>

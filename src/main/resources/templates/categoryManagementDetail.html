@@ -23,7 +23,11 @@
 												
 					<div class="invisible-container column flex-1">
 						<div th:replace="fragments/common :: back-button"></div>
-						
+						<div th:replace="fragments/categoryComponents :: category-detail (category = ${category})"></div>
+						<div class="row">
+							<a class="primary-btn" th:href="@{/management/edit}">Edit</a>
+							<a class="primary-btn">Remove</a>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -24,7 +24,7 @@
 					<div class="invisible-container column flex-1">
 						<a class="primary-btn left smooth-transition" th:href="@{/management/product}">Create</a>
 						<div class="list overflow-auto">
-							<div sec:authorize="hasRole('ROLE_REVIEWER')"  class="list-item-container" th:each="product : ${products}">
+							<div sec:authorize="hasRole('ROLE_REVIEWER')" class="list-item-container" th:each="product : ${products}">
 								<div class="row">
 									<div th:replace="fragments/common :: product-item (object=${product}, redirect=@{/management/product/{id}(id=${product.id})})"></div>
 									<div class="list-item-management smooth-transition">

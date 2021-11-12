@@ -7,7 +7,9 @@
 <body>
 	<div th:fragment="product-detail (product)" class="invisible-container">
 		<h1 th:text="${product.name}"></h1>
-		<span th:text="${product.description}"></span>
+		<div th:text="row">
+			<span th:text="${product.description}"></span>
+		</div>
 		<div class="row">
 			<span>EAN: </span><span th:text="${product.ean}"></span>
 		</div>			
@@ -25,5 +27,10 @@
 			</div>
 		</div>
 	</div>
+	
+	<form th:fragment="product-input (action)">
+		<input class="form-input" type="text" placeholder="Name"/>
+		<input class="form-input" type="text" placeholder="Description"/>
+	</form>
 </body>
 </html>
