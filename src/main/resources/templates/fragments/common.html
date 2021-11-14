@@ -1,73 +1,106 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<header th:fragment="header" class="top-row">
 		<a th:href="@{/}" class="logo"></a>
 		<div class="spring"></div>
-		<form sec:authorize="!isAuthenticated()" th:action="@{/management/products}" method="get">
-			<button type="submit" class="account-control smooth-transition">Sign in</button>
+		<form sec:authorize="!isAuthenticated()"
+			th:action="@{/management/products}" method="get">
+			<button type="submit" class="account-control smooth-transition">
+				<span>Sign in</span>
+			</button>
 		</form>
-		
-		<form sec:authorize="isAuthenticated()" th:action="@{/management/products}" method="get">
+
+		<form sec:authorize="isAuthenticated()"
+			th:action="@{/management/products}" method="get">
 			<button type="submit" class="account-control smooth-transition">Dashboard</button>
 		</form>
-		
-		<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-			<button type="submit" class="account-control smooth-transition">Sign out</button>
+
+		<form sec:authorize="isAuthenticated()" th:action="@{/logout}"
+			method="post">
+			<button type="submit" class="account-control smooth-transition">
+				<span>Sign out</span>
+			</button>
 		</form>
 	</header>
-		
-	<form th:fragment="product-search" th:action="@{/products}" action="products" method="get">
-		<label class="search-control smooth-transition">
-			<span class="search-control-icon bi bi-search"></span>
-			<input class="search-control-input" type="search" placeholder="Find by EAN or product name" title="product search input" th:name="filter"/>
+
+	<form th:fragment="product-search" th:action="@{/products}"
+		action="products" method="get">
+		<label class="search-control smooth-transition"> <span
+			class="search-control-icon bi bi-search"></span> <input
+			class="search-control-input" type="search"
+			placeholder="Find by EAN or product name"
+			title="product search input" th:name="filter" />
 		</label>
 	</form>
-	
-	<button th:fragment="back-button" class="transparent-btn left back-btn smooth-transition" onclick='javascript:window.history.back()'>
+
+	<button th:fragment="back-button"
+		class="transparent-btn left back-btn smooth-transition"
+		onclick='javascript:window.history.back()'>
 		<span class="btn-content bi bi-chevron-left"></span>
 	</button>
-	
-	<label th:fragment="sidebar-button" class="sidebar-button" for="sidebar-button-input">
-		<span class="bi bi-list"></span>
+
+	<label th:fragment="sidebar-button" class="sidebar-button"
+		for="sidebar-button-input"> <span class="bi bi-list"></span>
 	</label>
-	
+
 	<div th:fragment="sidebar (selected)" class="sidebar-container">
-		<input class="sidebar-button-input" id="sidebar-button-input" type="checkbox"/>
-		<label class="sidebar-background" for="sidebar-button-input"></label>
+		<input class="sidebar-button-input" id="sidebar-button-input"
+			type="checkbox" /> <label class="sidebar-background"
+			for="sidebar-button-input"></label>
 		<nav class="sidebar overflow-auto smooth-transition">
-			<a class="sidebar-item smooth-transition" th:href="@{/management/products}" th:classappend="${selected == 0} ? 'active' : ''">
-				<span class="sidebar-item-icon bi bi-bag"></span>
-				<span class="sidebar-item-text">Products</span>
-			</a>
-			<a sec:authorize="hasRole('ROLE_REVIEWER')" class="sidebar-item smooth-transition" th:href="@{/management/suppliers}" th:classappend="${selected == 1} ? 'active' : ''">
-				<span class="sidebar-item-icon bi bi-telephone"></span>
-				<span class="sidebar-item-text">Suppliers</span>
-			</a>
-			<a sec:authorize="hasRole('ROLE_REVIEWER')" class="sidebar-item smooth-transition" th:href="@{/management/categories}" th:classappend="${selected == 2} ? 'active' : ''">
-				<span class="sidebar-item-icon bi bi-bookmark"></span>
-				<span class="sidebar-item-text">Categories</span>
+			<a class="sidebar-item smooth-transition"
+				th:href="@{/management/products}"
+				th:classappend="${selected == 0} ? 'active' : ''"> <span
+				class="sidebar-item-icon bi bi-bag"></span> <span
+				class="sidebar-item-text">Products</span>
+			</a> <a sec:authorize="hasRole('ROLE_REVIEWER')"
+				class="sidebar-item smooth-transition"
+				th:href="@{/management/suppliers}"
+				th:classappend="${selected == 1} ? 'active' : ''"> <span
+				class="sidebar-item-icon bi bi-telephone"></span> <span
+				class="sidebar-item-text">Suppliers</span>
+			</a> <a sec:authorize="hasRole('ROLE_REVIEWER')"
+				class="sidebar-item smooth-transition"
+				th:href="@{/management/categories}"
+				th:classappend="${selected == 2} ? 'active' : ''"> <span
+				class="sidebar-item-icon bi bi-bookmark"></span> <span
+				class="sidebar-item-text">Categories</span>
 			</a>
 		</nav>
 	</div>
-	
-	<a th:fragment="product-item (object, redirect)" class="list-item smooth-transition flex-1" th:href="${redirect}">
-		<span class="list-item-info">
-			<span class="list-item-main-text" th:text="${object.name}"></span>
-			<span th:if="${object.ean != null}" class="list-item-secondary-text" th:text="${object.ean}"></span>
-		</span>
+
+	<a th:fragment="product-item (object, redirect)"
+		class="list-item smooth-transition flex-1" th:href="${redirect}">
+		<span class="list-item-info"> <span class="list-item-main-text"
+			th:text="${object.name}"></span> <span th:if="${object.ean != null}"
+			class="list-item-secondary-text" th:text="${object.ean}"></span>
+	</span>
 	</a>
-	
-	<a th:fragment="list-item (object, redirect)" class="list-item smooth-transition flex-1" th:href="${redirect}">
-		<span class="list-item-info">
-			<span class="list-item-main-text" th:text="${object.name}"></span>
-		</span>
+
+	<a th:fragment="list-item (object, redirect)"
+		class="list-item smooth-transition flex-1" th:href="${redirect}">
+		<span class="list-item-info"> <span class="list-item-main-text"
+			th:text="${object.name}"></span>
+	</span>
 	</a>
-	
+
+	<form class="" th:fragment="remove-dialog (title, content, action)"
+		action="@{action}" method="post">
+		<div class="container">
+			<h3 th:text="${title}"></h3>
+			<div class="invisible-container" th:text="${content}"></div>
+			<div class="row">
+				<button class="primary-btn flex-1" type="submit">Delete</button>
+				<button class="secondary-btn flex-1" type="button" onclick='javascript:window.history.back()'>Cancel</button>
+			</div>
+		</div>
+	</form>
+
 	<footer th:fragment="footer" class="footer">
 		<span>© 2021, Lukáš Moravec, All rights reserved.</span>
 	</footer>

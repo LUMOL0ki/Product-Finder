@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href="/css/app.css" rel="stylesheet" />
+	    <link rel="icon" type="image/svg+xml" href="/images/barcode.svg"/>
+     
+		<title>Product finder - Management</title>
+	</head>
+	<body>
+	<div class="index-layout">
+			<div class="sidebar-view column no-gap">								
+				<div class="row no-gap primary-bg">
+					<div th:replace="fragments/common :: sidebar-button"></div>
+					<div th:replace="fragments/common :: header"></div>
+				</div>
+
+				<div class="row no-gap overflow-auto flex-1">
+					<div th:replace="fragments/common :: sidebar(selected=2)"></div>
+												
+					<div class="content center column flex-1">
+						<div th:replace="/fragments/common :: remove-dialog (title='Remove category', content='Are you sure you want to remove category.', action=@{/management/category/remove(id=${id})})"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>

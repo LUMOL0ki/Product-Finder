@@ -6,6 +6,7 @@
 	--small: 768px;
 	--medium: 992px;
 	--large: 1200px;
+	--transition-speed: 250ms;
 }
 
 :root, light-theme {
@@ -39,6 +40,10 @@ html, body {
 	width: 100%;
 	font-family: Arial, Helvetica, sans-serif;
 	color: var(--primary-text-color);
+}
+
+::placeholder {
+	font-family: Arial, Helvetica, sans-serif; 
 }
 
 .primary-bg {
@@ -125,6 +130,7 @@ html, body {
   	background: var(--secondary-element-color);
   	border: none;
   	padding: 8px;
+  	transition: var(--transition-speed);
   }
     
   .form-input:hover {
@@ -382,7 +388,8 @@ html, body {
 	border: none;
 	border-radius: var(--rounded-element);
 	padding: 8px 16px;
-	cursor: pointer;	
+	cursor: pointer;
+	transition: var(--transition-speed);	
 }
 
 .primary-btn:hover {
@@ -413,7 +420,8 @@ html, body {
 	border: none;
 	border-radius: var(--rounded-element);
 	padding: 8px 16px;
-	cursor: pointer;	
+	cursor: pointer;
+	transition: var(--transition-speed);	
 }
 
 .secondary-btn:hover {
@@ -444,6 +452,7 @@ html, body {
 	border-radius: var(--rounded-element);
 	padding: 16px;	
 	cursor: pointer;
+	transition: var(--transition-speed);
 }
 
 .transparent-btn:hover {

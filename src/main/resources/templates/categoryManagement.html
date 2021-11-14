@@ -29,7 +29,7 @@
 									<div th:replace="fragments/common :: list-item (object=${category}, redirect=@{/management/category/{id}(id=${category.id})})")></div>
 									<div class="list-item-management smooth-transition">
 										<a class="primary-btn list-item-management-edit" th:href="@{/management/category/edit/{id}(id=${category.id})}"><span class="bi bi-pencil-square"></span></a>
-										<a class="primary-btn list-item-management-remove"><span class="bi bi-trash"></span></a>
+										<a class="primary-btn list-item-management-remove" th:href="@{/management/category/remove/{id}(id=${category.id})}"><span class="bi bi-trash"></span></a>
 									</div>
 								</div>
 							</div>
