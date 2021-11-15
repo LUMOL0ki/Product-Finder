@@ -13,6 +13,6 @@ public interface IBaseRepository<T extends BaseEntity<Long>> {
 	T create(T entity);
 	void edit(T entity);
 	void remove(T entity);
-	int count();
+	long count();
 	boolean exists(T entity);
 }

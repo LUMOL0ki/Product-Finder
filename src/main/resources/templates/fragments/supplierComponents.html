@@ -5,6 +5,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
+	<div th:fragment="supplier-detail (supplier)" class="invisible-container">
+		<h1 th:text="${supplier.name}"></h1>
+		<div th:text="row">
+			<span th:text="${supplier.description}"></span>
+		</div>
+	</div>
+	
+	<form th:fragment="supplier-input (action)" class="list" th:action="${action}" action=action method="post" th:object="${supplier}">
+		<input class="form-input" type="text" placeholder="Name" th:field="*{name}"/>
+		<input class="form-input" type="text" placeholder="Description" th:filed="*{description}"/>
+		<button type="submit" class="primary-btn">Save</button>
+		<button type="button" class="secondary-btn" onclick='javascript:window.history.back()'>Cancel</button>
+	</form>
 </body>
 </html>

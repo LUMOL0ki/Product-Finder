@@ -3,7 +3,6 @@ package vsb.vea.data.jdbc;
 import java.util.List;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import vsb.vea.data.irepositories.ICategoryRepository;

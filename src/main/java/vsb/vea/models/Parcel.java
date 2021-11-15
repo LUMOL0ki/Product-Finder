@@ -3,6 +3,9 @@ package vsb.vea.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Parcel extends Item{
 
 	public Parcel(long id, String name) {

@@ -60,22 +60,22 @@ public abstract class SupplierControllerTest {
 	
 	@Test
 	public void Create() throws FormatException {
-		int before = repository.count();
+		long before = repository.count();
 		SupplierInput supplierInput = new SupplierInput();
 		supplierInput.setName("test");
 		supplierInput.setDescription(null);
 		controller.create(supplierInput);
-		int after = repository.count();
+		long after = repository.count();
 		assertTrue(before < after);
 	}
 	
 	public void Edit() throws FormatException {
-		int before = repository.count();
+		long before = repository.count();
 		SupplierInput supplierInput = new SupplierInput();
 		supplierInput.setName("test");
 		supplierInput.setDescription(null);
 		controller.edit(1, supplierInput);
-		int after = repository.count();
+		long after = repository.count();
 		
 		assertTrue(before == after && controller.findById(1).getName() == supplierInput.getName());
 	}
@@ -83,9 +83,9 @@ public abstract class SupplierControllerTest {
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0, 1, 4, Integer.MAX_VALUE})
 	public void Remove(long id) {
-		int before = repository.count();
+		long before = repository.count();
 		controller.remove(id);
-		int after = repository.count();
+		long after = repository.count();
 		if(id <= 0) {
 			assertTrue("not removed", before == after);
 		}

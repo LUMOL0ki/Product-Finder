@@ -29,7 +29,7 @@
 									<div th:replace="fragments/common :: product-item (object=${product}, redirect=@{/management/product/{id}(id=${product.id})})"></div>
 									<div class="list-item-management smooth-transition">
 										<a sec:authorize="hasRole('ROLE_REVIEWER')"  class="primary-btn list-item-management-edit" th:href="@{/management/product/edit/{id}(id=${product.id})}"><span class="bi bi-pencil-square"></span></a>
-										<a sec:authorize="hasRole('ROLE_REVIEWER')"  class="primary-btn list-item-management-remove"><span class="bi bi-trash"></span></a>
+										<a sec:authorize="hasRole('ROLE_REVIEWER')"  class="primary-btn list-item-management-remove" th:href="@{/management/product/remove/{id}(id=${product.id})}"><span class="bi bi-trash"></span></a>
 									</div>
 								</div>
 							</div>

@@ -90,7 +90,7 @@
 	</a>
 
 	<form class="" th:fragment="remove-dialog (title, content, action)"
-		action="@{action}" method="post">
+		th:action="${action}" method="post">
 		<div class="container">
 			<h3 th:text="${title}"></h3>
 			<div class="invisible-container" th:text="${content}"></div>

@@ -56,7 +56,7 @@ public abstract class MockBaseRepository<T extends BaseEntity<Long>> implements 
 	}
 
 	@Override
-	public int count() {
+	public long count() {
 		return entities.size();
 	}
 	

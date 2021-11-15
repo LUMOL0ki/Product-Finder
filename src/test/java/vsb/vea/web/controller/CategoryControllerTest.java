@@ -61,32 +61,32 @@ public abstract class CategoryControllerTest {
 	
 	@Test
 	public void Create() throws FormatException {
-		int before = repository.count();
+		long before = repository.count();
 		CategoryInput categoryInput = new CategoryInput();
-		categoryInput.name = "test";
-		categoryInput.description = null;
+		categoryInput.setName("test");
+		categoryInput.setDescription(null);
 		controller.create(categoryInput);
-		int after = repository.count();
+		long after = repository.count();
 		assertTrue(before < after);
 	}
 	
 	public void Edit() throws FormatException {
-		int before = repository.count();
+		long before = repository.count();
 		CategoryInput categoryInput = new CategoryInput();
-		categoryInput.name = "test";
-		categoryInput.description = null;
+		categoryInput.setName("test");
+		categoryInput.setDescription(null);
 		controller.edit(1, categoryInput);
-		int after = repository.count();
+		long after = repository.count();
 		
-		assertTrue(before == after && controller.findById(1).getBody().getName() == categoryInput.name);
+		assertTrue(before == after && controller.findById(1).getBody().getName() == categoryInput.getName());
 	}
 	
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0, 1, 4, Integer.MAX_VALUE})
 	public void Remove(long id) {
-		int before = repository.count();
+		long before = repository.count();
 		controller.remove(id);
-		int after = repository.count();
+		long after = repository.count();
 		if(id <= 0) {
 			assertTrue("not removed", before == after);
 		}

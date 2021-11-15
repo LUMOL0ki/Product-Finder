@@ -38,7 +38,7 @@ public class JdbcBaseRepository<T extends BaseEntity<Long>>  implements IBaseRep
 	}
 
 	@Override
-	public int count() {
+	public long count() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

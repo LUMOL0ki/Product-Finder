@@ -20,4 +20,28 @@ public class JPASupplierRepository extends JPABaseRepository<Supplier> implement
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Supplier> get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Supplier findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean exists(Supplier entity) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -2,6 +2,9 @@ package vsb.vea.models;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Product extends Item{
 
 	public Product() {

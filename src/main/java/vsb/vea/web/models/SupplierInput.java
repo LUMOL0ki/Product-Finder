@@ -1,6 +1,9 @@
 package vsb.vea.web.models;
 
+import javax.validation.constraints.NotEmpty;
+
 public class SupplierInput {
+	@NotEmpty(message = "name cannot be empty.")
 	private String name;
 	private String description;
 	private AddressInput address;

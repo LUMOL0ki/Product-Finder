@@ -2,12 +2,15 @@ package vsb.vea.models;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Address extends BaseEntity<Long> {
-	public String line;
-	public String city;
-	public String postalCode;
-	public String country;
-	public Date created;
+	private String line;
+	private String city;
+	private String postalCode;
+	private String country;
+	private Date created;
 	
 	public Address(String line, String city, String postalCode, String country) {
 		super();
