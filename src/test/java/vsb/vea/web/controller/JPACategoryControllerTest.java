@@ -1,5 +1,10 @@
 package vsb.vea.web.controller;
 
-public class JPACategoryControllerTest {
+import vsb.vea.data.jpa.JPACategoryRepository;
 
+public class JPACategoryControllerTest extends CategoryControllerTest {
+
+	public JPACategoryControllerTest() {
+		super(new JPACategoryRepository());
+	}
 }

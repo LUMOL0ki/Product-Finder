@@ -2,6 +2,8 @@ package vsb.vea.data.jpa;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
@@ -17,31 +19,28 @@ public class JPASupplierRepository extends JPABaseRepository<Supplier> implement
 
 	@Override
 	public List<Supplier> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Supplier> query = context.createQuery("SELECT s FROM Supplier s WHERE lower(s.name) like lower(?1)", Supplier.class);
+		return query.setParameter(1, name).getResultList(); 
 	}
 
 	@Override
 	public List<Supplier> get() {
-		// TODO Auto-generated method stub
-		return null;
+	    return context.createQuery("SELECT s FROM Supplier s", Supplier.class).getResultList();
 	}
 
 	@Override
 	public Supplier findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return context.find(Supplier.class, id);
 	}
 
 	@Override
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return context.createQuery("SELECT count(s) FROM Supplier s", long.class).getSingleResult();
 	}
 
 	@Override
 	public boolean exists(Supplier entity) {
-		// TODO Auto-generated method stub
-		return false;
+		TypedQuery<Boolean> query = context.createQuery("SELECT CASE WHEN COUNT(s) > 0 THEN true ELSE false END FROM Supplier s WHERE s.name = ?1", Boolean.class);
+		return query.setParameter(1, entity.getName()).getSingleResult();
 	}
 }

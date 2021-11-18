@@ -2,6 +2,8 @@ package vsb.vea.data.jpa;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
@@ -17,44 +19,41 @@ public class JPAProductRepository extends JPABaseRepository<Product> implements 
 
 	@Override
 	public List<Product> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where lower(p.name) like lower(?1)", Product.class);
+		return query.setParameter(1, name).getResultList(); 
 	}
 
 	@Override
 	public Product findByEAN(String ean) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where p.ean = ?1", Product.class);
+		return query.setParameter(1, ean).getSingleResult(); 
 	}
 
 	@Override
 	public List<Product> findByNameOrEAN(String filter) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where lower(p.name) like lower(?1) or p.ean = ?1", Product.class);
+		return query.setParameter(1, filter).getResultList();
 	}
 
 	@Override
 	public List<Product> get() {
-		// TODO Auto-generated method stub
-		return null;
+	    return context.createQuery("SELECT p FROM Product p", Product.class).getResultList();
 	}
 
 	@Override
 	public Product findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return context.find(Product.class, id);
 	}
 
 	@Override
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return context.createQuery("SELECT count(p) FROM Product p", long.class).getSingleResult();
 	}
 
 	@Override
 	public boolean exists(Product entity) {
-		// TODO Auto-generated method stub
-		return false;
+		TypedQuery<Boolean> query = context.createQuery("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Product p WHERE p.id = ?1 and p.name = ?2", Boolean.class);
+		return query.setParameter(1, entity.getId()).setParameter(2, entity.getName()).getSingleResult();
 	}
 
 }

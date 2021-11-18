@@ -33,5 +33,47 @@ public class JdbcProductRepository extends JdbcBaseRepository<Product>  implemen
 		return null;
 	}
 
+	@Override
+	public List<Product> get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product create(Product entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void edit(Product entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(Product entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public long count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean exists(Product entity) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }
