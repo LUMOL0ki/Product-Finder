@@ -22,8 +22,8 @@ public abstract class JPABaseRepository<T extends BaseEntity<Long>> implements I
 	@Override
 	public abstract T findById(long id);
 
-	@Override
 	@Transactional
+	@Override
 	public T create(T entity) {
 		if(!this.exists(entity)) {
 			context.persist(entity);
@@ -34,16 +34,16 @@ public abstract class JPABaseRepository<T extends BaseEntity<Long>> implements I
 		}
 	}
 
-	@Override
 	@Transactional
+	@Override
 	public void edit(T entity) {
 		if(this.exists(entity)) {
 			context.merge(entity);	
 		}
 	}
 
-	@Override
 	@Transactional
+	@Override
 	public void remove(T entity) {
 		if(this.exists(entity)) {
 			context.remove(entity);	

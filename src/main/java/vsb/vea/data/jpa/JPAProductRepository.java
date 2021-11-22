@@ -2,6 +2,7 @@ package vsb.vea.data.jpa;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.TypedQuery;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,9 +18,14 @@ import vsb.vea.models.Product;
 		  matchIfMissing = false)
 public class JPAProductRepository extends JPABaseRepository<Product> implements IProductRepository {
 
+	@PostConstruct
+	protected void initialize() {
+ 
+	}
+	
 	@Override
 	public List<Product> findByName(String name) {
-		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where lower(p.name) like lower(?1)", Product.class);
+		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where lower(p.name) LIKE lower(?1)", Product.class);
 		return query.setParameter(1, name).getResultList(); 
 	}
 
@@ -31,7 +37,7 @@ public class JPAProductRepository extends JPABaseRepository<Product> implements 
 
 	@Override
 	public List<Product> findByNameOrEAN(String filter) {
-		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where lower(p.name) like lower(?1) or p.ean = ?1", Product.class);
+		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where lower(p.name) like lower(?1) OR p.ean = ?1", Product.class);
 		return query.setParameter(1, filter).getResultList();
 	}
 
@@ -52,7 +58,7 @@ public class JPAProductRepository extends JPABaseRepository<Product> implements 
 
 	@Override
 	public boolean exists(Product entity) {
-		TypedQuery<Boolean> query = context.createQuery("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Product p WHERE p.id = ?1 and p.name = ?2", Boolean.class);
+		TypedQuery<Boolean> query = context.createQuery("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Product p WHERE p.id = ?1 AND p.name = ?2", Boolean.class);
 		return query.setParameter(1, entity.getId()).setParameter(2, entity.getName()).getSingleResult();
 	}
 

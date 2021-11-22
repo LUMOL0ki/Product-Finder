@@ -23,9 +23,6 @@ import vsb.vea.models.Category;
 		  matchIfMissing = true)
 public class JdbcCategoryRepository extends JdbcBaseRepository<Category> implements ICategoryRepository {
 
-	private JdbcTemplate jdbcTemplate;
-	private SimpleJdbcInsert insert;
-
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
@@ -57,16 +54,6 @@ public class JdbcCategoryRepository extends JdbcBaseRepository<Category> impleme
 	@Override
 	public Category findById(long id) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Category create(Category entity) {
-		if (entity.getId() == 0) {
-			insert.execute(new BeanPropertySqlParameterSource(entity));
-		} else {
-			// update
-		}
 		return null;
 	}
 

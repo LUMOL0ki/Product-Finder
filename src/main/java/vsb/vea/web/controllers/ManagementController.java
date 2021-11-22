@@ -91,8 +91,8 @@ public class ManagementController {
 		return new RedirectView("/management/products");
 	}
 	
-	@PostMapping("/product/edit")
-	public RedirectView productEdit(long id, @ModelAttribute @Validated ProductInput product, BindingResult error, Model model) {
+	@PostMapping("/product/edit/{id}")
+	public RedirectView productEdit(@PathVariable long id, @ModelAttribute @Validated ProductInput product, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("id", id);
 			model.addAttribute("product", product);
@@ -170,9 +170,9 @@ public class ManagementController {
 		return new RedirectView("/management/categories");
 	}
 	
-	@PostMapping("/category/edit")
+	@PostMapping("/category/edit/{id}")
 	@Secured("ROLE_REVIEWER")
-	public RedirectView categoryEdit(long id, @ModelAttribute @Validated CategoryInput category, BindingResult error, Model model) {
+	public RedirectView categoryEdit(@PathVariable long id, @ModelAttribute @Validated CategoryInput category, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("id", id);
 			model.addAttribute("category", category);
@@ -213,7 +213,7 @@ public class ManagementController {
 
 	@GetMapping("/supplier")
 	public String supplierCreatePage(Model model) {
-		model.addAttribute("supplier", new Supplier());
+		model.addAttribute("supplier", new SupplierInput());
 		return "supplierCreate";
 	}
 	
@@ -248,9 +248,9 @@ public class ManagementController {
 		return new RedirectView("/management/suppliers");
 	}
 	
-	@PostMapping("/supplier/edit")
+	@PostMapping("/supplier/edit/{id}")
 	@Secured("ROLE_REVIEWER")
-	public RedirectView supplierEdit(long id, @ModelAttribute @Validated SupplierInput supplier, BindingResult error, Model model) {
+	public RedirectView supplierEdit(@PathVariable long id, @ModelAttribute @Validated SupplierInput supplier, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("id", id);
 			model.addAttribute("supplier", supplier);

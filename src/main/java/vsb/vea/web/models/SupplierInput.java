@@ -6,7 +6,7 @@ public class SupplierInput {
 	@NotEmpty(message = "name cannot be empty.")
 	private String name;
 	private String description;
-	private AddressInput address;
+	private AddressInput address = new AddressInput();
 	private String web;
 	
 	public String getName() {

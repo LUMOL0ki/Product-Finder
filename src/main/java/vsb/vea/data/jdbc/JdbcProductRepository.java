@@ -1,8 +1,17 @@
 package vsb.vea.data.jdbc;
 
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import vsb.vea.data.irepositories.IProductRepository;
@@ -14,6 +23,24 @@ import vsb.vea.models.Product;
 		  havingValue = "jdbc", 
 		  matchIfMissing = true)
 public class JdbcProductRepository extends JdbcBaseRepository<Product>  implements IProductRepository {
+
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+		jdbcTemplate = new JdbcTemplate(dataSource);
+		insert = new SimpleJdbcInsert(dataSource).withTableName("Product").usingGeneratedKeyColumns("id")
+				.usingColumns("name", "description", "ean", "supplierId", "categoryId", "status");
+	}
+
+	@PostConstruct
+	public void init() {
+		try (Statement stm = jdbcTemplate.getDataSource().getConnection().createStatement()) {
+			stm.executeUpdate("CREATE TABLE Product (" + "id INT NOT NULL auto_increment," + " name varchar(255), "
+					+ "description varchar(800), " + "ean varchar(14), " + "supplierId int, " + "cateoryId int, " + "status varchar(80), " + " PRIMARY KEY (id), "
+							+ "FOREIGN KEY (supplierId) REFERENCES supplier(id), " + "FOREIGN KEY (categoryId) REFERENCES category(id)" + ");");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public List<Product> findByName(String name) {
@@ -41,12 +68,6 @@ public class JdbcProductRepository extends JdbcBaseRepository<Product>  implemen
 
 	@Override
 	public Product findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Product create(Product entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

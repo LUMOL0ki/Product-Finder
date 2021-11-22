@@ -31,6 +31,8 @@
 	<form th:fragment="product-input (action)" class="list" th:action="${action}" action=action method="post" th:object="${product}">
 		<input class="form-input" type="text" placeholder="Name" th:field="*{name}"/>
 		<input class="form-input" type="text" placeholder="Description" th:filed="*{description}"/>
+		<input class="form-input" type="text" placeholder="EAN" th:filed="*{ean}"/>
+		
 		<button type="submit" class="primary-btn">Save</button>
 		<button type="button" class="secondary-btn" onclick='javascript:window.history.back()'>Cancel</button>
 	</form>

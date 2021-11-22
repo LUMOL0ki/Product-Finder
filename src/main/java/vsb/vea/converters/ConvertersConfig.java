@@ -1,4 +1,4 @@
-package vsb.vea.conveters;
+package vsb.vea.converters;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;

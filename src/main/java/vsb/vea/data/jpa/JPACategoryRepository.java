@@ -2,7 +2,6 @@ package vsb.vea.data.jpa;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.TypedQuery;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,15 +17,6 @@ import vsb.vea.models.Category;
 		  matchIfMissing = false)
 public class JPACategoryRepository extends JPABaseRepository<Category> implements ICategoryRepository {
 
-	@PostConstruct
-	protected void initialize() {
-		this.create(new Category("A"));
-		this.create(new Category("B"));
-		this.create(new Category("C"));
-		this.create(new Category("D"));
-		this.create(new Category("E"));
-	}
-	
 	@Override
 	public List<Category> findByName(String name) {
 		TypedQuery<Category> query = context.createQuery("SELECT c FROM Category c where lower(c.name) like lower(?1)", Category.class);
@@ -50,7 +40,7 @@ public class JPACategoryRepository extends JPABaseRepository<Category> implement
 
 	@Override
 	public boolean exists(Category entity) {
-		if(this.findById(entity.getId()) != null) {
+		if(entity.getId() != null && this.findById(entity.getId()) != null) {
 			return true;
 		}else {
 			return false;	

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -17,7 +18,7 @@ public class Supplier extends BaseEntity<Long> {
 	private String web;
 	@OneToMany(mappedBy = "supplier")
 	private List<Product> products;
-	private Date created;
+	private Date created = new Date();
 	
 	public Supplier() {
 		created = new Date();
@@ -102,5 +103,10 @@ public class Supplier extends BaseEntity<Long> {
 	}
 	public void setCreated(Date created) {
 		this.created = created;
+	}
+
+	@PrePersist
+	protected void onCreate() {
+	  created = new Date();
 	}
 }

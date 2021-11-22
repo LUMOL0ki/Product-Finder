@@ -3,26 +3,26 @@ package vsb.vea.models;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
+//@Entity
 public class Item extends BaseEntity<Long> {
 	@NotEmpty(message = "name cannot be empty.")
 	protected String name;
 	protected String description;
 	protected String ean;
-	@Column(name = "supplier_id", insertable = false, updatable = false)
+	@Column(name = "supplier_id")
 	protected long supplierId;
 	@ManyToOne
 	protected Supplier supplier;
-	@Column(name = "category_id", insertable = false, updatable = false)
+	@Column(name = "category_id")
 	protected long categoryId;
 	@ManyToOne
 	protected Category category;
 	protected StatusType status;
-	protected Date created;
+	protected Date created = new Date();
 		
 	public Item() {
 		created = new Date();
@@ -167,5 +167,8 @@ public class Item extends BaseEntity<Long> {
 		this.created = created;
 	}
 	
-	
+	@PrePersist
+	protected void onCreate() {
+	  created = new Date();
+	}
 }
