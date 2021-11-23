@@ -57,19 +57,23 @@ public class ManagementController {
 
 	@GetMapping("/product")
 	public String productCreatePage(Model model) {
+		model.addAttribute("categories", categoryService.get());
+		model.addAttribute("suppliers", supplierService.get());
 		model.addAttribute("product", new ProductInput());
 		return "productCreate";
 	}
 	
 	@GetMapping("/product/edit/{id}")
 	public String productEditPage(@PathVariable long id, Model model) {
-		model.addAttribute("id", id);
 		try {
 			model.addAttribute("product", productService.findById(id));
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		model.addAttribute("id", id);
+		model.addAttribute("categories", categoryService.get());
+		model.addAttribute("suppliers", supplierService.get());
 		return "productEdit";
 	}
 

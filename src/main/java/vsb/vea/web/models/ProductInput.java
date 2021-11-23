@@ -6,7 +6,7 @@ public class ProductInput {
 	@NotEmpty(message = "Name cannot be empty.")
 	public String name;
 	public String description;
-	@NotEmpty(message = "Ean cannot be empty.")
+	//@NotEmpty(message = "Ean cannot be empty.")
 	public String ean;
 	public int supplierId;
 	public int categoryId;

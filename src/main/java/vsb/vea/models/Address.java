@@ -12,6 +12,10 @@ public class Address extends BaseEntity<Long> {
 	private String country;
 	private Date created;
 	
+	public Address() {
+		super();
+	}
+
 	public Address(String line, String city, String postalCode, String country) {
 		super();
 		this.line = line;

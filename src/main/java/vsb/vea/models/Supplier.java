@@ -14,7 +14,7 @@ public class Supplier extends BaseEntity<Long> {
 	private String name;
 	private String description;
 	private long addressId;
-	private Address address;
+	private Address address = new Address();
 	private String web;
 	@OneToMany(mappedBy = "supplier")
 	private List<Product> products;
