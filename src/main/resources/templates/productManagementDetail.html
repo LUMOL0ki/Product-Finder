@@ -24,6 +24,10 @@
 					<div class="invisible-container column flex-1">
 						<div th:replace="fragments/common :: back-button"></div>
 						<div th:replace="fragments/productComponents :: product-detail (product=${product})"></div>
+						<div class="row">
+							<a class="primary-btn" th:href="@{/management/product/edit/{id}(id=${product.id})}">Edit</a>
+							<a class="primary-btn" th:href="@{/management/product/remove/{id}(id=${product.id})}">Remove</a>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -7,8 +7,21 @@
 <body>
 	<div th:fragment="supplier-detail (supplier)" class="invisible-container">
 		<h1 th:text="${supplier.name}"></h1>
-		<div th:text="row">
+		<div class="row">
 			<span th:text="${supplier.description}"></span>
+		</div>
+		<span th:text="${supplier.web}"></span>
+		
+		<div th:if="${supplier.address != null}">
+			<h3>Address</h3>
+			<div class="row">
+				<span th:text="${supplier.address.line}"></span>
+			</div>
+			<div class=row>
+				<span th:text="${supplier.address.city}"></span>,
+				<span th:text="${supplier.address.postalCode}"></span>
+			</div>
+			<span th:text="${supplier.address.country}"></span>
 		</div>
 	</div>
 	

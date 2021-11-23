@@ -1,6 +1,7 @@
 package vsb.vea.web.mapper;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vsb.vea.models.Product;
@@ -20,10 +21,12 @@ public class ProductMapper {
 	}
 	
 	public static Product fromProductInput(ProductInput productInput) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		return modelMapper.map(productInput, Product.class);
 	}
 
 	public static Product fromProductInput(long id, ProductInput productInput) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Product product = modelMapper.map(productInput, Product.class);
 		product.setId(id);
 		return product;

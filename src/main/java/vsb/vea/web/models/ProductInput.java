@@ -6,10 +6,10 @@ public class ProductInput {
 	@NotEmpty(message = "Name cannot be empty.")
 	public String name;
 	public String description;
-	//@NotEmpty(message = "Ean cannot be empty.")
+	@NotEmpty(message = "Ean cannot be empty.")
 	public String ean;
-	public int supplierId;
-	public int categoryId;
+	public long supplierId;
+	public long categoryId;
 	
 	public String getName() {
 		return name;
@@ -29,16 +29,16 @@ public class ProductInput {
 	public void setEan(String ean) {
 		this.ean = ean;
 	}
-	public int getSupplierId() {
+	public long getSupplierId() {
 		return supplierId;
 	}
-	public void setSupplierId(int supplierId) {
+	public void setSupplierId(long supplierId) {
 		this.supplierId = supplierId;
 	}
-	public int getCategoryId() {
+	public long getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
 }

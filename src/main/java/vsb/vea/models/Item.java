@@ -87,7 +87,7 @@ public class Item extends BaseEntity<Long> {
 		this.category = category;
 	}
 		
-	public Item(Long id, String name, String description, String ean, int supplierId, int categoryId) {
+	public Item(Long id, String name, String description, String ean, long supplierId, long categoryId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -97,7 +97,7 @@ public class Item extends BaseEntity<Long> {
 		this.categoryId = categoryId;
 	}
 
-	public Item(Long id, String name, String description, String ean, int supplierId, Supplier supplier, int categoryId,
+	public Item(Long id, String name, String description, String ean, long supplierId, Supplier supplier, long categoryId,
 			Category category, StatusType status, Date created) {
 		super();
 		this.id = id;
