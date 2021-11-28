@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import vsb.vea.models.Product;
+import vsb.vea.models.Supplier;
 
-public class ProductMapper implements RowMapper<Product>{
+public class SupplierRowMapper implements RowMapper<Supplier> {
 
 	@Override
-	public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public Supplier mapRow(ResultSet rs, int rowNum) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

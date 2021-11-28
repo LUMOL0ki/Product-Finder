@@ -16,7 +16,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.models.Product;
-import vsb.vea.models.Supplier;
 import vsb.vea.services.CategoryService;
 import vsb.vea.services.ProductService;
 import vsb.vea.services.SupplierService;

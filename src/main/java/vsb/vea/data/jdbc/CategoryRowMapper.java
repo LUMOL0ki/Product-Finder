@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import vsb.vea.models.Category;
 
-public class CategoryMapper implements RowMapper<Category>{
+public class CategoryRowMapper implements RowMapper<Category>{
 
 	@Override
 	public Category mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -1,4 +1,4 @@
-package vsb.vea.web;
+package vsb.vea;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

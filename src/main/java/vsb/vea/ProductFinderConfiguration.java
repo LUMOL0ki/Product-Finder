@@ -1,4 +1,4 @@
-package vsb.vea.web;
+package vsb.vea;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

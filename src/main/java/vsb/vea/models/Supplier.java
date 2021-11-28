@@ -3,7 +3,9 @@ package vsb.vea.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.validation.constraints.NotEmpty;
@@ -13,7 +15,9 @@ public class Supplier extends BaseEntity<Long> {
 	@NotEmpty(message = "name cannot be empty.")
 	private String name;
 	private String description;
+	@Column(name = "address_id", insertable = false, updatable = false)
 	private long addressId;
+	@ManyToOne
 	private Address address = new Address();
 	private String web;
 	@OneToMany(mappedBy = "supplier")

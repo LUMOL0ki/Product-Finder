@@ -10,7 +10,6 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import vsb.vea.data.irepositories.ICategoryRepository;
@@ -48,7 +47,7 @@ public class JdbcCategoryRepository extends JdbcBaseRepository<Category> impleme
 
 	@Override
 	public List<Category> get() {
-		return jdbcTemplate.query("select * from Category", new CategoryMapper());
+		return jdbcTemplate.query("select * from Category", new CategoryRowMapper());
 	}
 
 	@Override

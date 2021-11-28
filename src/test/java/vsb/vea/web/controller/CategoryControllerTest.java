@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import vsb.vea.data.irepositories.ICategoryRepository;
 import vsb.vea.exceptions.FormatException;
@@ -15,16 +17,20 @@ import vsb.vea.web.mapper.CategoryMapper;
 import vsb.vea.web.models.CategoryBrief;
 import vsb.vea.web.models.CategoryInput;
 
+@SpringBootTest
 public abstract class CategoryControllerTest {
 
+	@Autowired
 	private CategoryController controller;
+	@Autowired
 	private CategoryService service;
+	@Autowired
 	private ICategoryRepository repository;
 	
 	public CategoryControllerTest(ICategoryRepository categoryRepository) {
 		this.repository = categoryRepository;
-		service = new CategoryService(this.repository);
-		controller = new CategoryController(service);
+		//service = new CategoryService(this.repository);
+		//controller = new CategoryController(service);
 	}
 	
 	@Test

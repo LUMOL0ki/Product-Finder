@@ -2,14 +2,17 @@ package vsb.vea.data.jpa;
 
 import java.util.List;
 
-import javax.persistence.TypedQuery;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import vsb.vea.data.irepositories.ICategoryRepository;
 import vsb.vea.models.Category;
 
+/**
+ * 
+ * @author Lukas Moravec
+ *
+ */
 @Repository
 @ConditionalOnProperty(
 		  value="dataAccessSource", 
@@ -19,8 +22,9 @@ public class JPACategoryRepository extends JPABaseRepository<Category> implement
 
 	@Override
 	public List<Category> findByName(String name) {
-		TypedQuery<Category> query = context.createQuery("SELECT c FROM Category c where lower(c.name) like lower(?1)", Category.class);
-		return query.setParameter(1, name).getResultList(); 
+		return context.createQuery("SELECT c FROM Category c where lower(c.name) like lower(:name)", Category.class)
+				.setParameter("name", name)
+				.getResultList(); 
 	}
 
 	@Override

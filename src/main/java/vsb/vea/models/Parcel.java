@@ -1,11 +1,8 @@
 package vsb.vea.models;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Entity;
-
-@Entity
+//@Entity
 public class Parcel extends Item{
 
 	public Parcel(long id, String name) {
@@ -24,7 +21,7 @@ public class Parcel extends Item{
 		super(id, name, description, ean, supplierId, supplier, categoryId, category, status, created);
 		// TODO Auto-generated constructor stub
 	}
-	
+	/*
 	private List<Product> products;
 
 	public List<Product> getProducts() {
@@ -34,4 +31,5 @@ public class Parcel extends Item{
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+	*/
 }

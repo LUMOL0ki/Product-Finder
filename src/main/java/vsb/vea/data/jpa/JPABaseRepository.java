@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.lang.NonNull;
+
 import vsb.vea.data.irepositories.IBaseRepository;
 import vsb.vea.models.BaseEntity;
 
@@ -14,6 +16,7 @@ import vsb.vea.models.BaseEntity;
 public abstract class JPABaseRepository<T extends BaseEntity<Long>> implements IBaseRepository<T>{
 
 	@PersistenceContext
+	@NonNull
 	protected EntityManager context;
 	
 	@Override
