@@ -39,7 +39,7 @@ public class JPACategoryRepository extends JPABaseRepository<Category> implement
 
 	@Override
 	public long count() {
-		return context.createQuery("SELECT count(c) FROM Category c", long.class).getSingleResult();
+		return context.createQuery("SELECT count(c) FROM Category c", Long.class).getSingleResult();
 	}
 
 	@Override

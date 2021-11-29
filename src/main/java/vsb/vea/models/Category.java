@@ -1,5 +1,6 @@
 package vsb.vea.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Category extends BaseEntity<Long> {
 	private String name;
 	private String description;
 	@OneToMany(mappedBy = "category")
-	private List<Product> products;
+	private List<Product> products = new ArrayList<>();
 	private Date created = new Date();
 	
 	public Category() {

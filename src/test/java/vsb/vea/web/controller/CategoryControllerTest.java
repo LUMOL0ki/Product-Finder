@@ -6,31 +6,25 @@ import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import vsb.vea.data.irepositories.ICategoryRepository;
-import vsb.vea.exceptions.FormatException;
 import vsb.vea.services.CategoryService;
 import vsb.vea.web.controllers.CategoryController;
 import vsb.vea.web.mapper.CategoryMapper;
 import vsb.vea.web.models.CategoryBrief;
 import vsb.vea.web.models.CategoryInput;
 
-@SpringBootTest
 public abstract class CategoryControllerTest {
 
-	@Autowired
 	private CategoryController controller;
-	@Autowired
 	private CategoryService service;
-	@Autowired
 	private ICategoryRepository repository;
 	
 	public CategoryControllerTest(ICategoryRepository categoryRepository) {
 		this.repository = categoryRepository;
-		//service = new CategoryService(this.repository);
-		//controller = new CategoryController(service);
+		service = new CategoryService(this.repository);
+		controller = new CategoryController(service);
 	}
 	
 	@Test
@@ -42,7 +36,7 @@ public abstract class CategoryControllerTest {
 	@ValueSource(ints = {-1, 0, 1, Integer.MAX_VALUE})
 	public void FindById(long id) {
 		if(id <= 0) {
-			assertTrue(controller.findById(id) == null);
+			assertTrue(controller.findById(id).equals(null));
 		}
 		else {
 			for(CategoryBrief category : controller.get().getBody()) {
@@ -57,16 +51,12 @@ public abstract class CategoryControllerTest {
 	@NullAndEmptySource
 	@ValueSource(strings = {"", " ", "A", "SSDDSFDDFDF"})
 	public void FindByName(String name) {
-		if(name == null || name == "" || name == " ") {
-			assertTrue(controller.findByName(name) == null);
-		}
-		else if(name.length() > 0) {
-			assertTrue(controller.findByName(name).getBody().size() >= 0);
-		}
+		assertTrue("Invalid name format.", (name == null || name == "" || name == " ") && controller.findByName(name) == null);
+		assertTrue(name.length() > 0 && controller.findByName(name).getBody().size() >= 0);
 	}
 	
 	@Test
-	public void Create() throws FormatException {
+	public void Create() {
 		long before = repository.count();
 		CategoryInput categoryInput = new CategoryInput();
 		categoryInput.setName("test");
@@ -76,7 +66,7 @@ public abstract class CategoryControllerTest {
 		assertTrue(before < after);
 	}
 	
-	public void Edit() throws FormatException {
+	public void Edit() {
 		long before = repository.count();
 		CategoryInput categoryInput = new CategoryInput();
 		categoryInput.setName("test");

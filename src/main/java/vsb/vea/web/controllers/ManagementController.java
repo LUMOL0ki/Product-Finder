@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import vsb.vea.exceptions.FormatException;
@@ -134,11 +135,19 @@ public class ManagementController {
 		return "categoryManagementDetail";
 	}
 	
-	@GetMapping("/category")
+	@RequestMapping("/category")
 	@Secured("ROLE_REVIEWER")
-	public String categoryCreatePage(Model model) {
-		model.addAttribute("category", new CategoryInput());
-		return "categoryCreate";
+	public String categoryCreatePage(@ModelAttribute("category") @Validated CategoryInput category, BindingResult error, Model model) {
+		if(error.hasErrors()) {
+			model.addAttribute("category", category);
+			//model.setViewName("categoryCreate");
+			//ModelAndView modelAndView = new ModelAndView("categoryCreate");
+			//modelAndView.addObject("category", category);
+			System.out.println("aaaa");
+			return "categoryCreate";
+		}
+		//model.addAttribute("category", category);
+		return "categoryManagement";
 	}
 	
 	@GetMapping("/category/edit/{id}")
@@ -161,16 +170,20 @@ public class ManagementController {
 		return "categoryRemove";
 	}
 	
-	@PostMapping("/category/create")
+	@RequestMapping("/category/create")
 	@Secured("ROLE_REVIEWER")
-	public RedirectView categoryCreate(@ModelAttribute @Validated CategoryInput category, BindingResult error, Model model) {
+	public String categoryCreate(@ModelAttribute @Validated CategoryInput category, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("category", category);
-			return new RedirectView("/management/category");
+			//model.setViewName("categoryCreate");
+			//ModelAndView modelAndView = new ModelAndView("categoryCreate");
+			//modelAndView.addObject("category", category);
+			System.out.println("aaaa");
+			return "categoryCreate";
 		}
 		
 		categoryService.create(CategoryMapper.fromCategoryInput(category));
-		return new RedirectView("/management/categories");
+		return "redirect:/management/categories"; //new ModelAndView("redirect:/management/categories");
 	}
 	
 	@PostMapping("/category/edit/{id}")
