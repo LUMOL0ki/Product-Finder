@@ -8,11 +8,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 public abstract class Item extends BaseEntity<Long> {
 	@NotEmpty(message = "name cannot be empty.")
 	protected String name;
 	protected String description;
+    @Column(unique = true)
+	@Length(min = 18, max = 18)
 	protected String ean;
 	@Column(name = "supplier_id", insertable = false, updatable = false)
 	protected long supplierId;

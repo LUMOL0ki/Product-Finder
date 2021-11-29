@@ -22,12 +22,15 @@ public class SupplierMapper {
 	}
 	
 	public static Supplier fromSupplierInput(SupplierInput supplierInput) {
-		return modelMapper.map(supplierInput, Supplier.class);
+		Supplier tempSupplier = modelMapper.map(supplierInput, Supplier.class);
+		tempSupplier.setAddress(AddressMapper.fromAddressInput(supplierInput.getAddress()));
+		return tempSupplier;
 	}
 
 	public static Supplier fromSupplierInput(long id, SupplierInput supplierInput) {
 		Supplier tempSupplier = modelMapper.map(supplierInput, Supplier.class);
 		tempSupplier.setId(id);
+		tempSupplier.setAddress(AddressMapper.fromAddressInput(supplierInput.getAddress()));
 		return tempSupplier;
 	}
 	
@@ -36,7 +39,9 @@ public class SupplierMapper {
 	}
 	
 	public static SupplierDetail toSupplierDetail(Supplier supplier) {
-		return modelMapper.map(supplier, SupplierDetail.class);
+		SupplierDetail tempSupplier = modelMapper.map(supplier, SupplierDetail.class);
+		tempSupplier.setAddress(AddressMapper.toAddressDetail(supplier.getAddress()));
+		return tempSupplier;
 	}
 	
 	public static SupplierInput toSupplierInput(Supplier supplier) {

@@ -3,6 +3,7 @@ package vsb.vea.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -16,9 +17,9 @@ public class Supplier extends BaseEntity<Long> {
 	private String name;
 	private String description;
 	@Column(name = "address_id", insertable = false, updatable = false)
-	private long addressId;
-	@ManyToOne
-	private Address address = new Address();
+	private Long addressId;
+	@ManyToOne(cascade = {CascadeType.ALL})
+	private Address address;
 	private String web;
 	@OneToMany(mappedBy = "supplier")
 	private List<Product> products;
@@ -81,8 +82,9 @@ public class Supplier extends BaseEntity<Long> {
 	public long getAddressId() {
 		return addressId;
 	}
-	public void setAddressId(long addressId) {
+	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
+		this.address.id = addressId;
 	}
 	public Address getAddress() {
 		return address;

@@ -19,7 +19,7 @@
 				</div>
 
 				<div class="row no-gap overflow-auto flex-1">
-					<div th:replace="fragments/common :: sidebar(selected=2)"></div>
+					<div th:replace="fragments/common :: sidebar(selected=0)"></div>
 												
 					<div class="content center column flex-1">
 						<div th:replace="/fragments/common :: remove-dialog (title='Remove product', content='Are you sure you want to remove this product.', action=@{/management/product/remove(id=${id})})"></div>

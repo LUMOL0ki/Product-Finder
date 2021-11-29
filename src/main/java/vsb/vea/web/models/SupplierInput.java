@@ -6,8 +6,12 @@ public class SupplierInput {
 	@NotEmpty(message = "name cannot be empty.")
 	private String name;
 	private String description;
-	private AddressInput address = new AddressInput();
+	private AddressInput address;
 	private String web;
+	
+	public SupplierInput() {
+		address = new AddressInput();
+	}
 	
 	public String getName() {
 		return name;
@@ -22,13 +26,14 @@ public class SupplierInput {
 		this.description = description;
 	}
 	public AddressInput getAddress() {
-		return address;
+		return this.address;
 	}
 	public void setAddress(AddressInput address) {
 		this.address = address;
 	}
+	
 	public String getWeb() {
-		return web;
+		return this.web;
 	}
 	public void setWeb(String web) {
 		this.web = web;

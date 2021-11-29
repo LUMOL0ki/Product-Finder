@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import vsb.vea.exceptions.FormatException;
 import vsb.vea.models.Product;
+import vsb.vea.models.Supplier;
 import vsb.vea.services.CategoryService;
 import vsb.vea.services.ProductService;
 import vsb.vea.services.SupplierService;
@@ -68,7 +68,6 @@ public class ManagementController {
 		try {
 			model.addAttribute("product", productService.findById(id));
 		} catch (FormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		model.addAttribute("id", id);
@@ -85,26 +84,26 @@ public class ManagementController {
 	}
 	
 	@PostMapping("/product/create")
-	public RedirectView productCreate(@ModelAttribute @Validated ProductInput product, BindingResult error, Model model) {
+	public String productCreate(@ModelAttribute("product") @Validated ProductInput product, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("product", product);
-			return new RedirectView("/management/product");
+			return "productCreate";
 		}
 		
 		productService.create(ProductMapper.fromProductInput(product));
-		return new RedirectView("/management/products");
+		return "redirect:/management/products";
 	}
 	
 	@PostMapping("/product/edit/{id}")
-	public RedirectView productEdit(@PathVariable long id, @ModelAttribute @Validated ProductInput product, BindingResult error, Model model) {
+	public String productEdit(@PathVariable long id, @ModelAttribute("product") @Validated ProductInput product, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("id", id);
 			model.addAttribute("product", product);
-			return new RedirectView("/management/product/edit/{id}");
+			return "productEdit";
 		}
 		
 		productService.edit(ProductMapper.fromProductInput(id, product));
-		return new RedirectView("/management/products");
+		return "redirect:/management/products";
 	}
 
 	@PostMapping("/product/remove")
@@ -135,19 +134,10 @@ public class ManagementController {
 		return "categoryManagementDetail";
 	}
 	
-	@RequestMapping("/category")
+	@GetMapping("/category")
 	@Secured("ROLE_REVIEWER")
-	public String categoryCreatePage(@ModelAttribute("category") @Validated CategoryInput category, BindingResult error, Model model) {
-		if(error.hasErrors()) {
-			model.addAttribute("category", category);
-			//model.setViewName("categoryCreate");
-			//ModelAndView modelAndView = new ModelAndView("categoryCreate");
-			//modelAndView.addObject("category", category);
-			System.out.println("aaaa");
-			return "categoryCreate";
-		}
-		//model.addAttribute("category", category);
-		return "categoryManagement";
+	public String categoryCreatePage(@ModelAttribute("category") CategoryInput category, Model model) {
+		return "categoryCreate";
 	}
 	
 	@GetMapping("/category/edit/{id}")
@@ -157,7 +147,6 @@ public class ManagementController {
 		try {
 			model.addAttribute("category", categoryService.findById(id));
 		} catch (FormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "categoryEdit";
@@ -170,33 +159,29 @@ public class ManagementController {
 		return "categoryRemove";
 	}
 	
-	@RequestMapping("/category/create")
+	@PostMapping("/category/create")
 	@Secured("ROLE_REVIEWER")
-	public String categoryCreate(@ModelAttribute @Validated CategoryInput category, BindingResult error, Model model) {
+	public String categoryCreate(@ModelAttribute("category") @Validated CategoryInput category, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("category", category);
-			//model.setViewName("categoryCreate");
-			//ModelAndView modelAndView = new ModelAndView("categoryCreate");
-			//modelAndView.addObject("category", category);
-			System.out.println("aaaa");
 			return "categoryCreate";
 		}
 		
 		categoryService.create(CategoryMapper.fromCategoryInput(category));
-		return "redirect:/management/categories"; //new ModelAndView("redirect:/management/categories");
+		return "redirect:/management/categories";
 	}
 	
 	@PostMapping("/category/edit/{id}")
 	@Secured("ROLE_REVIEWER")
-	public RedirectView categoryEdit(@PathVariable long id, @ModelAttribute @Validated CategoryInput category, BindingResult error, Model model) {
+	public String categoryEdit(@PathVariable long id, @ModelAttribute("category") @Validated CategoryInput category, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("id", id);
 			model.addAttribute("category", category);
-			return new RedirectView("/management/category/edit/{id}");
+			return "categoryEdit";
 		}
 		
 		categoryService.edit(CategoryMapper.fromCategoryInput(id, category));
-		return new RedirectView("/management/categories");
+		return "redirect:/management/categories";
 	}
 
 	@PostMapping("/category/remove")
@@ -240,7 +225,6 @@ public class ManagementController {
 		try {
 			model.addAttribute("supplier", supplierService.findById(id));
 		} catch (FormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "supplierEdit";
@@ -254,27 +238,27 @@ public class ManagementController {
 	}
 	
 	@PostMapping("/supplier/create")
-	public RedirectView supplierCreate(@ModelAttribute @Validated SupplierInput supplier, BindingResult error, Model model) {
+	public String supplierCreate(@ModelAttribute("supplier") @Validated SupplierInput supplier, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("supplier", supplier);
-			return new RedirectView("/management/supplier");
+			return "supplierCreate";
 		}
 		
 		supplierService.create(SupplierMapper.fromSupplierInput(supplier));
-		return new RedirectView("/management/suppliers");
+		return "redirect:/management/suppliers";
 	}
 	
 	@PostMapping("/supplier/edit/{id}")
 	@Secured("ROLE_REVIEWER")
-	public RedirectView supplierEdit(@PathVariable long id, @ModelAttribute @Validated SupplierInput supplier, BindingResult error, Model model) {
+	public String supplierEdit(@PathVariable long id, @ModelAttribute("supplier") @Validated SupplierInput supplier, BindingResult error, Model model) {
 		if(error.hasErrors()) {
 			model.addAttribute("id", id);
 			model.addAttribute("supplier", supplier);
-			return new RedirectView("/management/supplier/edit/{id}");
+			return "supplierEdit";
 		}
 		
 		supplierService.edit(SupplierMapper.fromSupplierInput(id, supplier));
-		return new RedirectView("/management/suppliers");
+		return "redirect:/management/suppliers";
 	}
 	
 	@PostMapping("/supplier/remove")

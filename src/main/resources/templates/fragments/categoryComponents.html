@@ -12,11 +12,7 @@
 			</div>
 		</div>
 	
-		<form th:fragment="category-input (action)" class="list" th:action="${action}" action=action method="get" th:object="${category}">
-			<ul>
-				<li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
-			</ul>
-			
+		<form th:fragment="category-input (action)" class="list" th:action="${action}" action=action method="post" th:object="${category}">
 			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error</span>
 			<input class="form-input" type="text" placeholder="name" th:field="*{name}"/>
 			<textarea class="form-input" rows="6" placeholder="description" th:field="*{description}"></textarea>

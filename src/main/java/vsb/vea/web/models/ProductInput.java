@@ -2,11 +2,14 @@ package vsb.vea.web.models;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 public class ProductInput {
 	@NotEmpty(message = "Name cannot be empty.")
 	public String name;
 	public String description;
 	@NotEmpty(message = "Ean cannot be empty.")
+	@Length(message = "Invalid EAN format.", min = 18, max = 18)
 	public String ean;
 	public long supplierId;
 	public long categoryId;
