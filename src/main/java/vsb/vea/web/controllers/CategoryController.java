@@ -48,9 +48,8 @@ public class CategoryController {
 	
 	@GetMapping("/find/{id}")
 	public ResponseEntity<CategoryDetail> findById(@PathVariable long id) {
-		Category category = null;
 		try {
-			category = service.findById(id);
+			Category category = service.findById(id);
 			return category != null ? ResponseEntity.ok(CategoryMapper.toCategoryDetail(category)) : new ResponseEntity<CategoryDetail>(HttpStatus.NOT_FOUND);
 		} catch (FormatException e) {
 			e.printStackTrace();
