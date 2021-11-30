@@ -19,13 +19,13 @@ public abstract class Item extends BaseEntity<Long> {
 	@Length(min = 18, max = 18)
 	protected String ean;
 	@Column(name = "supplier_id", insertable = false, updatable = false)
-	protected long supplierId;
+	protected Long supplierId;
 	@ManyToOne
-	protected Supplier supplier;
+	protected Supplier supplier = new Supplier();
 	@Column(name = "category_id", insertable = false, updatable = false)
-	protected long categoryId;
+	protected Long categoryId;
 	@ManyToOne
-	protected Category category;
+	protected Category category = new Category();
 	protected StatusType status;
 	protected Date created = new Date();
 		
@@ -138,8 +138,9 @@ public abstract class Item extends BaseEntity<Long> {
 	public long getSupplierId() {
 		return supplierId;
 	}
-	public void setSupplierId(long supplierId) {
+	public void setSupplierId(Long supplierId) {
 		this.supplierId = supplierId;
+		this.supplier.setId(supplierId);
 	}
 	public Supplier getSupplier() {
 		return supplier;
@@ -150,8 +151,9 @@ public abstract class Item extends BaseEntity<Long> {
 	public long getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(long categoryId) {
+	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
+		this.category.setId(categoryId);
 	}
 	public Category getCategory() {
 		return category;

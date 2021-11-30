@@ -33,10 +33,12 @@ public class ProductMapper {
 	}
 	
 	public static ProductBrief toProductBrief(Product product) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		return modelMapper.map(product, ProductBrief.class);
 	}
 
 	public static ProductDetail toProductDetail(Product product) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		ProductDetail productDetail = modelMapper.map(product, ProductDetail.class);
 		productDetail.setSupplier(modelMapper.map(product.getSupplier(), SupplierBrief.class));
 		productDetail.setCategory(modelMapper.map(product.getCategory(), CategoryBrief.class));

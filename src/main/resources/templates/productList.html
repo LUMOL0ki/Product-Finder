@@ -13,11 +13,11 @@
 <body>
 	<div class="index-layout">
 		<div th:replace="fragments/common :: header"></div>
-		<div class="search-container">
+		<div class="search-container-small">
 			<div th:replace="fragments/common :: product-search"></div>
 			<!-- <button type="button"></button> -->
 		</div>
-		<div class="overflow">
+		<div class="list flex-1 overflow">
 		<div class="content list">
 		
 			<div th:if="${products.size() == 0}">Product not found.</div>

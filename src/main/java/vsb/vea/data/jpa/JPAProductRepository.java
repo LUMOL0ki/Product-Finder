@@ -25,20 +25,20 @@ public class JPAProductRepository extends JPABaseRepository<Product> implements 
 	
 	@Override
 	public List<Product> findByName(String name) {
-		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where lower(p.name) LIKE lower(?1)", Product.class);
-		return query.setParameter(1, name).getResultList(); 
+		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(:name)", Product.class);
+		return query.setParameter("name", name).getResultList(); 
 	}
 
 	@Override
 	public Product findByEAN(String ean) {
-		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where p.ean = ?1", Product.class);
+		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p WHERE p.ean = ?1", Product.class);
 		return query.setParameter(1, ean).getSingleResult(); 
 	}
 
 	@Override
 	public List<Product> findByNameOrEAN(String filter) {
-		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p where lower(p.name) like lower(?1) OR p.ean = ?1", Product.class);
-		return query.setParameter(1, filter).getResultList();
+		TypedQuery<Product> query = context.createQuery("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%',:filter,'%')) OR p.ean = :filter", Product.class);
+		return query.setParameter("filter", filter).getResultList();
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import vsb.vea.data.irepositories.IBaseRepository;
 import vsb.vea.models.BaseEntity;
 
 @Service
-public class BaseService<T extends BaseEntity<Long>, TRepository extends IBaseRepository<T>> {
+public abstract class BaseService<T extends BaseEntity<Long>, TRepository extends IBaseRepository<T>> {
 	
 	protected TRepository repository;
 	

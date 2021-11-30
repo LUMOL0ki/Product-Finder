@@ -40,7 +40,7 @@ public class JPASupplierRepository extends JPABaseRepository<Supplier> implement
 
 	@Override
 	public boolean exists(Supplier entity) {
-		TypedQuery<Boolean> query = context.createQuery("SELECT CASE WHEN COUNT(s) > 0 THEN true ELSE false END FROM Supplier s WHERE s.name = ?1", Boolean.class);
-		return query.setParameter(1, entity.getName()).getSingleResult();
+		TypedQuery<Boolean> query = context.createQuery("SELECT CASE WHEN COUNT(s) > 0 THEN true ELSE false END FROM Supplier s WHERE s.name = :name", Boolean.class);
+		return query.setParameter("name", entity.getName()).getSingleResult();
 	}
 }

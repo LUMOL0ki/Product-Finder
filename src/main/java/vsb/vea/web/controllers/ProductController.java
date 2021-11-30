@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import vsb.vea.exceptions.FormatException;
@@ -21,12 +24,16 @@ public class ProductController {
 	public ProductController(ProductService service) {
 		this.service = service;
 	}
-	
+
+	@GetMapping	
+    @ResponseBody
 	public List<ProductBrief> get(){
 		return service.get().stream().map(ProductMapper::toProductBrief).collect(Collectors.toList());
 	}
-	
-	public ProductDetail findById(long id) {
+
+	@GetMapping("/find/{id}")
+    @ResponseBody
+	public ProductDetail findById(@PathVariable long id) {
 		try {
 			return ProductMapper.toProductDetail(service.findById(id));
 		} catch (FormatException e) {
@@ -35,7 +42,7 @@ public class ProductController {
 			return null;
 		}
 	}
-	
+
 	public List<ProductBrief> findByName(String name){
 		try {
 			return service.findByName(name).stream().map(ProductMapper::toProductBrief).collect(Collectors.toList());

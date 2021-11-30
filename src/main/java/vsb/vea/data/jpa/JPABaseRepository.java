@@ -40,7 +40,7 @@ public abstract class JPABaseRepository<T extends BaseEntity<Long>> implements I
 	@Transactional
 	@Override
 	public void edit(T entity) {
-		if(this.exists(entity)) {
+		if(this.findById(entity.getId()) != null) {
 			context.merge(entity);	
 		}
 	}

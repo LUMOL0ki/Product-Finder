@@ -10,15 +10,15 @@
 		<div class="row">
 			<span th:text="${supplier.description}"></span>
 		</div>
-		<span th:text="${supplier.web}"></span>
+		<a th:href="'https://' + ${supplier.web}" th:text="${supplier.web}" target="_blank"></a>
 		
-		<div th:if="${supplier.address != null}">
+		<div th:if="${supplier.address != null && supplier.address.line != ''}">
 			<h3>Address</h3>
 			<div class="row">
 				<span th:text="${supplier.address.line}"></span>
 			</div>
 			<div class=row>
-				<span th:text="${supplier.address.city}"></span>,
+				<span th:text="${supplier.address.city + ','}"></span>
 				<span th:text="${supplier.address.postalCode}"></span>
 			</div>
 			<span th:text="${supplier.address.country}"></span>

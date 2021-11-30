@@ -332,6 +332,16 @@ html, body {
  	height: 200px;
  }
  
+ .search-container-small {
+ 	background: var(--alternative-bg-color);
+ 	display: flex;
+ 	flex-direction: column;
+ 	align-items: stretch;
+ 	justify-content: center;
+ 	padding: 24px 16px;
+ 	height: 80px;
+ }
+ 
  .search-control {
  	position: relative;
     display: flex;
@@ -638,6 +648,10 @@ html, body {
 	}
 	
 	.search-container {
+		align-items: center;
+	}
+	
+	.search-container-small {
 		align-items: center;
 	}
 	
