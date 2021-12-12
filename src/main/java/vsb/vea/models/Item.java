@@ -19,7 +19,7 @@ public abstract class Item extends BaseEntity<Long> {
 	protected String name;
 	protected String description;
     @Column(unique = true)
-	@Length(min = 18, max = 18)
+	@Length(min = 13, max = 13)
 	protected String ean;
 	@Column(name = "supplier_id", insertable = false, updatable = false)
 	protected Long supplierId;

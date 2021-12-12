@@ -9,7 +9,7 @@ public class ProductInput {
 	public String name;
 	public String description;
 	@NotEmpty(message = "Ean cannot be empty.")
-	@Length(message = "Invalid EAN format.", min = 18, max = 18)
+	@Length(message = "Invalid EAN format.", min = 13, max = 13)
 	public String ean;
 	public long supplierId;
 	public long categoryId;

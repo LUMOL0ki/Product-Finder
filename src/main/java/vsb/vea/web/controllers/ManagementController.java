@@ -88,6 +88,8 @@ public class ManagementController {
 	@PostMapping("/product/create")
 	public String productCreate(@ModelAttribute("product") @Validated ProductInput product, BindingResult error, Model model) {
 		if(error.hasErrors()) {
+			model.addAttribute("categories", categoryService.get());
+			model.addAttribute("suppliers", supplierService.get());
 			model.addAttribute("product", product);
 			return "productCreate";
 		}
